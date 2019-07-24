@@ -47,9 +47,7 @@ public class ReplyController {
 		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT,
-			RequestMethod.PATCH }, value = "/{rno}", consumes = "application/json", produces = {
-					MediaType.TEXT_PLAIN_VALUE })
+	@RequestMapping(method = { RequestMethod.PUT,RequestMethod.PATCH }, value = "/{rno}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
 
 		vo.setRno(rno);
@@ -88,9 +86,7 @@ public class ReplyController {
 //	 return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
 //	 }
 
-	@GetMapping(value = "/pages/{bno}/{page}", 
-			produces = { MediaType.APPLICATION_XML_VALUE,
-			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@GetMapping(value = "/pages/{bno}/{page}", produces = { MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
 
 		Criteria cri = new Criteria(page, 10);
