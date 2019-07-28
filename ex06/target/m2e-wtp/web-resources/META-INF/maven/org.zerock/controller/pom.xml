@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.zerock</groupId>
 	<artifactId>controller</artifactId>
-	<name>ex05</name>
+	<name>ex06</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 
@@ -86,6 +86,12 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency> 
+			<groupId>org.lazyluke</groupId> 
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version> 
+		</dependency>
+
 
 		<!-- @Inject -->
 		<dependency>
