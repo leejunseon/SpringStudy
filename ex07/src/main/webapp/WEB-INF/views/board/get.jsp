@@ -194,7 +194,7 @@
               </div>      
               <div class="form-group">
                 <label>Replyer</label> 
-                <input class="form-control" name='replyer' value='replyer'>
+                <input class="form-control" name='replyer' value='replyer' readonly="readonly">
               </div>
               <div class="form-group">
                 <label>Reply Date</label> 
@@ -324,32 +324,6 @@ $(document).ready(function () {
         showList(pageNum);
       });     
 
-    
-/*     function showList(page){
-      
-      replyService.getList({bno:bnoValue,page: page|| 1 }, function(list) {
-        
-        var str="";
-       if(list == null || list.length == 0){
-        
-        replyUL.html("");
-        
-        return;
-      }
-       for (var i = 0, len = list.length || 0; i < len; i++) {
-           str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-           str +="  <div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>"; 
-           str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
-           str +="    <p>"+list[i].reply+"</p></div></li>";
-         }
-
-
-    replyUL.html(str);
-
-      });//end function
-      
-   }//end showList */
-   
     var modal = $(".modal");
     var modalInputReply = modal.find("input[name='reply']");
     var modalInputReplyer = modal.find("input[name='replyer']");
@@ -359,6 +333,13 @@ $(document).ready(function () {
     var modalRemoveBtn = $("#modalRemoveBtn");
     var modalRegisterBtn = $("#modalRegisterBtn");
     
+    var replyer=null;
+    <sec:authorize access="isAuthenticated()">
+    	replyer='<sec:authentication property="principal.username"/>';
+    </sec:authorize>
+    var csrfHeaderName="${_csrf.headerName}";
+    var csrfTokenValue="${_csrf.token}";
+    
     $("#modalCloseBtn").on("click", function(e){
     	
     	modal.modal('hide');
@@ -367,6 +348,7 @@ $(document).ready(function () {
     $("#addReplyBtn").on("click", function(e){
       
       modal.find("input").val("");
+      modal.find("input[name='replyer']").val(replyer);
       modalInputReplyDate.closest("div").hide();
       modal.find("button[id !='modalCloseBtn']").hide();
       
@@ -376,6 +358,10 @@ $(document).ready(function () {
       
     });
     
+    //ajax 기본 설정
+    $(document).ajaxSend(function(e,xhr,options){
+    	xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+    });
 
     modalRegisterBtn.on("click",function(e){
       
@@ -420,66 +406,64 @@ $(document).ready(function () {
             
       });
     });
-  
-    
-/*     modalModBtn.on("click", function(e){
-      
-      var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-      
-      replyService.update(reply, function(result){
-            
-        alert(result);
-        modal.modal("hide");
-        showList(1);
-        
-      });
-      
-    });
 
-    modalRemoveBtn.on("click", function (e){
+	modalModBtn.on("click", function(e){
     	  
-  	  var rno = modal.data("rno");
-  	  
-  	  replyService.remove(rno, function(result){
-  	        
-  	      alert(result);
-  	      modal.modal("hide");
-  	      showList(1);
-  	      
-  	  });
-  	  
-  	}); */
-
-    modalModBtn.on("click", function(e){
-    	  
-   	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
+    	var originalReplyer=modalInputReplyer.val();
+   	  	var reply = {
+   	  			rno:modal.data("rno"), 
+   	  			reply: modalInputReply.val(),
+   	  			replyer:originalReplyer};
+   	  	
+   	  	if(!replyer){
+   	  		alert("로그인 후 수정이 가능합니다.");
+   	  		modal.modal("hide");
+   	  		return;
+   	  	}
+   	  	
+   	  	console.log("Original Replyer: "+originalReplyer);
+   	  	
+   	  	if(replyer!=originalReplyer){
+   	  		alert("자신이 작성한 댓글만 수정이 가능합니다.");
+   	  		modal.modal("hide");
+   	  		return;
+   	  	}
    	  
-   	  replyService.update(reply, function(result){
+   	  	replyService.update(reply, function(result){
    	        
-   	    alert(result);
-   	    modal.modal("hide");
-   	    showList(pageNum);
+   	    	alert(result);
+   	    	modal.modal("hide");
+   	    	showList(pageNum);
    	    
-   	  });
+   	  	});
    	  
    	});
 
-
-   	modalRemoveBtn.on("click", function (e){
+	modalRemoveBtn.on("click", function (e){
    	  
-   	  var rno = modal.data("rno");
+   	  	var rno = modal.data("rno");
+   	  	
+   	  	if(!replyer){
+   	  		alert("로그인 후 삭제가 가능합니다.");
+   	  		modal.modal("hide");
+   	  		return;
+   	  	}
+   	  	
+   	  	var originalReplyer=modalInputReplyer.val();
+   	  	
+   	  	if(replyer!=originalReplyer){
+   	  		alert("자신이 작성한 댓글만 삭제가 가능합니다.");
+   	  		modal.modal("hide");
+   	  		return;
+   	  	}
    	  
-   	  replyService.remove(rno, function(result){
+		replyService.remove(rno,originalReplyer, function(result){
    	        
    	      alert(result);
    	      modal.modal("hide");
    	      showList(pageNum);
-   	      
    	  });
-   	  
    	});
-
- 
 });
 
 </script>

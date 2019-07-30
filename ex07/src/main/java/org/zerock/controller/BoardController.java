@@ -110,7 +110,7 @@ public class BoardController {
 	
 	@PreAuthorize("principal.username==#writer")
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr,String writer) {
 
 		log.info("remove..." + bno);
 		
