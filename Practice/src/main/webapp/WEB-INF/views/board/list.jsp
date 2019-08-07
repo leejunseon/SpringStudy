@@ -16,7 +16,13 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              	<h6 class="m-1 font-weight-bold text-primary fa-pull-left">Board List Page</h6>
+              	<button id='regBtn' type="button" class="btn btn-secondary btn-icon-split btn-sm fa-pull-right">
+            		<span class="icon text-white-50">
+            			<i class="fas fa-arrow-right"></i>
+            		</span>
+            		<span class="text">Register New Board</span>
+            	</button>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -57,5 +63,50 @@
 
         </div>
         <!-- /.container-fluid -->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  			<div class="modal-dialog" role="document">
+  				<div class="modal-content">
+     				<div class="modal-header">
+        				<h5 class="modal-title">등록 완료</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         					<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+			 	<div class="modal-body">
+			    	<p>처리가 완료되었습니다.</p>
+			    </div>
+      			<div class="modal-footer">
+      				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-primary">Save changes</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var result='<c:out value="${result}"/>';
+		checkModal(result);
+		
+		//게시물 등록 시 Modal
+		function checkModal(result){
+			if(result===''){
+				return;
+			}
+			
+			if(parseInt(result)>0){
+				$(".modal-body").html("게시글 "+parseInt(result)+" 번이 등록되었습니다.");
+			}
+			$("#myModal").modal("show");
+		}
+		
+		//Register button 이벤트
+		$("#regBtn").on("click",function(){
+			self.location="/board/register";
+		});
+	});
+</script>
 
 <%@include file="../includes/footer.jsp" %>
