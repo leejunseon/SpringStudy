@@ -28,6 +28,11 @@ public class BoardController {
 		model.addAttribute("list",service.getList());
 	}
 	
+	@GetMapping("/register")
+	public void register() {
+		
+	}
+	
 	@PostMapping("/register")
 	public String register(BoardVO board,RedirectAttributes rttr) {
 		log.info("register: "+board);
@@ -40,5 +45,23 @@ public class BoardController {
 	public void get(@RequestParam("bno")Long bno,Model model) {//@RequestParam 생략해도 무방. 파라미터 이름과 변수 이름을 기준으로 동작하기 때문
 		log.info("get: "+bno);
 		model.addAttribute("board",service.get(bno));
+	}
+	
+	@PostMapping("/modify")
+	public String modify(BoardVO board,RedirectAttributes rttr) {
+		log.info("modify: "+board);
+		if(service.modify(board)) {
+			rttr.addFlashAttribute("result","success");
+		}
+		return "redirect:/board/list";
+	}
+	
+	@PostMapping("/remove")
+	public String remove(@RequestParam("bno")Long bno,RedirectAttributes rttr) {
+		log.info("remove: "+bno);
+		if(service.remove(bno)) {
+			rttr.addFlashAttribute("result","success");
+		}
+		return "redirect:/board/list";
 	}
 }
