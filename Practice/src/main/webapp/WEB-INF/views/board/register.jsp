@@ -26,10 +26,11 @@
         			<label>Writer</label>
         			<input class="form-control" name='writer'>
         		</div>
+        		
         		<button type="submit" class="btn btn-primary btn-icon-split">
         			<span class="text">Submit</span>
         		</button>
-        		<button type="reset" class="btn btn-primary">
+        		<button type="reset" class="btn btn-primary btn-icon-split">
         			<span class="text">Reset Button</span>
         		</button>
         	</form>
