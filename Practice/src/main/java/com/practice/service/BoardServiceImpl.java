@@ -2,9 +2,11 @@ package com.practice.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.practice.domain.BoardVO;
+import com.practice.domain.Criteria;
 import com.practice.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -48,8 +50,21 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardVO> getList() {
 		// TODO Auto-generated method stub
-		log.info("getList");
+		log.info("get List");
 		return mapper.getList();
+	}
+
+	@Override
+	public int getTotal() {
+		// TODO Auto-generated method stub
+		log.info("get total count");
+		return mapper.getTotalCount();
+	}
+
+	@Override
+	public List<BoardVO> findData(@Param("start")int start, @Param("length")int length) {
+		// TODO Auto-generated method stub
+		return mapper.findData(start,length);
 	}
 	
 }
