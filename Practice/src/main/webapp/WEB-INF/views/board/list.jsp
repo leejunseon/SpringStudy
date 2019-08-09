@@ -45,17 +45,6 @@
                       <th>수정일</th>
                     </tr>
                   </tfoot>
-                 <tbody>
-                 <c:forEach items="${list }" var="board">
-                 <tr>
-                 	<td><c:out value="${board.bno }"/></td>
-                 	<td><a href='/board/get?bno=<c:out value="${board.bno }"/>'><c:out value="${board.title }"/></a></td>
-                 	<td><c:out value="${board.writer }"/></td>
-                 	<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/></td>
-                 	<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate }"/></td>
-                 </tr>
-                 </c:forEach>
-                 </tbody>
                 </table>
               </div>
             </div>
@@ -85,6 +74,7 @@
   		</div>
 	</div>
 
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var result='<c:out value="${result}"/>';
@@ -108,7 +98,48 @@
 		$("#regBtn").on("click",function(){
 			self.location="/board/register";
 		});
+		
+		//dataTables 서버사이드 Pagination
+		$('#dataTable').dataTable( {
+			"stateSave": true,
+			"serverSide":true,
+			"processing":true,
+			"pagingType":"full_numbers",
+			 "order": [[ 3, "desc" ]],
+			"ajax":{
+				"url":"/board/example",
+				"type":"POST",
+				"dataSrc":function(res){
+					var data=res.data;
+					return data;
+				}
+			},
+			//JSON 데이터를 데이터 그리드에 표시
+			"columns":[
+				{"data":"bno"},
+				{"data": "title",
+			        "render": function(data, type, row, meta){
+						if(type === 'display'){
+			            	data = '<a href="/board/get?bno=' + row.bno + '">' + data + '</a>';
+			        	}
+			            return data;
+			    	}
+			    } ,
+				{"data":"writer"},
+				{"data":"regdate",type: 'date-dd-mmm-yyyy',targets: 0 },
+				{"data":"updateDate"}
+			],
+			"columnDefs":[
+				{targets:[3,4], 
+					render:function(data){
+			      		return moment(data).format('YYYY-MM-DD');
+			    	}
+				}
+			]
+		} );
 	});
+	
+	
 </script>
 
 <%@include file="../includes/footer.jsp" %>
