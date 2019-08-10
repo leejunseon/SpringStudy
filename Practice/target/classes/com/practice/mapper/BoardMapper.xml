@@ -87,6 +87,32 @@
 			)
 			where rn> #{start}
 		]]>
+			<choose>
+				<when test="orderNum=='0'.toString()">
+					order by bno
+				</when>
+				<when test="orderNum=='1'.toString()">
+					order by title
+				</when>
+				<when test="orderNum=='2'.toString()">
+					order by writer
+				</when>
+				<when test="orderNum=='3'.toString()">
+					order by regdate
+				</when>
+				<when test="orderNum=='4'.toString()">
+					order by updatedate
+				</when>
+			</choose>
+			
+			<choose>
+				<when test="orderDir=='asc'">
+					asc
+				</when>
+				<when test="orderDir='desc'">
+					desc
+				</when>
+			</choose>
 	</select>
 
 </mapper>

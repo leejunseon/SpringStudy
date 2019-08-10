@@ -99,13 +99,13 @@
 			self.location="/board/register";
 		});
 		
-		//dataTables 서버사이드 Pagination
-		$('#dataTable').dataTable( {
+		//dataTables 서버사이드 구현
+		$('#dataTable').dataTable( {			
 			"stateSave": true,
 			"serverSide":true,
 			"processing":true,
+			"order": [],
 			"pagingType":"full_numbers",
-			 "order": [[ 3, "desc" ]],
 			"ajax":{
 				"url":"/board/example",
 				"type":"POST",
@@ -130,11 +130,11 @@
 				{"data":"updateDate"}
 			],
 			"columnDefs":[
-				{targets:[3,4], 
+				{"targets":[3,4], 
 					render:function(data){
 			      		return moment(data).format('YYYY-MM-DD');
 			    	}
-				}
+				},
 			]
 		} );
 	});

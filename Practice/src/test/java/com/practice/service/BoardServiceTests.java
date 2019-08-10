@@ -9,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;

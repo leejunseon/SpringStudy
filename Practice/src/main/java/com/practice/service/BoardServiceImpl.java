@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.Criteria;
+import com.practice.domain.PagingDto;
 import com.practice.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -62,9 +62,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> findData(@Param("start")int start, @Param("length")int length) {
+	public List<BoardVO> findData(PagingDto pagingDto) {
 		// TODO Auto-generated method stub
-		return mapper.findData(start,length);
+		return mapper.findData(pagingDto);
 	}
 	
 }

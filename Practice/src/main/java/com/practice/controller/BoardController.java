@@ -1,10 +1,6 @@
 package com.practice.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,9 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.Criteria;
 import com.practice.domain.DataTableDto;
-/*import com.practice.domain.PageDTO;*/
+import com.practice.domain.PagingDto;
 import com.practice.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -41,11 +36,21 @@ public class BoardController {
 	@ResponseBody 
 	public ResponseEntity<DataTableDto> example(DataTableDto dto, @RequestBody MultiValueMap<String, String> formData){ 
 	    int draw = Integer.parseInt(formData.get("draw").get(0)); 
-	    int start = Integer.parseInt(formData.get("start").get(0)); 
-	    int length = Integer.parseInt(formData.get("length").get(0)); 
-
+	    String start = formData.get("start").get(0); 
+	    String length = formData.get("length").get(0); 
+	    String orderNum=formData.get("order[0][column]").get(0);
+	    String orderDir=formData.get("order[0][dir]").get(0);
+	    
+	    PagingDto paging=new PagingDto(start,length,orderNum,orderDir);
+	    //orderNum
+	    //0 : bno
+	    //1 : title
+	    //2 : writer
+	    //3 : regdate
+	    //4 : updatedate
+	    
 	    int total = service.getTotal(); 
-	    List<BoardVO> data = service.findData(start, length); 
+	    List<BoardVO> data = service.findData(paging); 
 
 	    dto.setDraw(draw); 
 	    dto.setRecordsFiltered(total); 

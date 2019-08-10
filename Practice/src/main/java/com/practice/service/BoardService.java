@@ -3,7 +3,7 @@ package com.practice.service;
 import java.util.List;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.Criteria;
+import com.practice.domain.PagingDto;
 
 public interface BoardService {
 
@@ -15,10 +15,9 @@ public interface BoardService {
 	
 	public boolean remove(Long bno);
 	
-	//public List<BoardVO> getList();
 	public List<BoardVO> getList();//페이징 정보 파라미터
 	
 	public int getTotal();
 
-	public List<BoardVO> findData(int start, int length);
+	public List<BoardVO> findData(PagingDto pagingDto);
 }
