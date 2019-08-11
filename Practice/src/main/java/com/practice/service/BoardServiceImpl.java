@@ -2,7 +2,6 @@ package com.practice.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.practice.domain.BoardVO;
@@ -19,6 +18,12 @@ public class BoardServiceImpl implements BoardService{
 	
 	private BoardMapper mapper;
 
+	@Override
+	public List<BoardVO> getList(PagingDto pagingDto) {
+		// TODO Auto-generated method stub
+		return mapper.getList(pagingDto);
+	}
+	
 	@Override
 	public void register(BoardVO board) {
 		// TODO Auto-generated method stub
@@ -48,23 +53,10 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> getList() {
-		// TODO Auto-generated method stub
-		log.info("get List");
-		return mapper.getList();
-	}
-
-	@Override
 	public int getTotal() {
 		// TODO Auto-generated method stub
 		log.info("get total count");
 		return mapper.getTotalCount();
-	}
-
-	@Override
-	public List<BoardVO> findData(PagingDto pagingDto) {
-		// TODO Auto-generated method stub
-		return mapper.findData(pagingDto);
 	}
 	
 }

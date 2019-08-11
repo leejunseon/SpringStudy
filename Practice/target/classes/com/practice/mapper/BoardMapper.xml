@@ -6,76 +6,6 @@
 
 	<select id="getList" resultType="com.practice.domain.BoardVO">
 		<![CDATA[
-			select * 
-			from tbl_board
-			where bno>0
-		]]>
-	</select>
-	
-	<select id="getListWithPaging" resultType="com.practice.domain.BoardVO">
-		<![CDATA[
-			select 
-				bno,title,content,writer,regdate,updatedate
-			from(
-				select /*+ index_desc(tbl_board pk_board) */
-					rownum rn,bno,title,content,writer,regdate,updatedate
-				from
-					tbl_board
-				where rownum<= #{pageNum}*#{amount}
-			)
-			where rn> (#{pageNum}-1)*#{amount}
-		]]>
-	</select>
-	
-	<insert id="insert">
-		insert into tbl_board(bno,title,content,writer)
-		values(seq_board.nextval,#{title},#{content},#{writer})
-	</insert>
-	
-	<insert id="insertSelectKey">
-		<!-- bno에다 결과값 넣음 -->
-		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
-			select seq_board.nextval 
-			from dual
-		</selectKey>
-		
-		insert into tbl_board (bno,title,content,writer)
-		values (#{bno},#{title},#{content},#{writer})
-	</insert>
-	
-	<select id="read" resultType="com.practice.domain.BoardVO">
-		select * 
-		from tbl_board 
-		where bno=#{bno}
-	</select>
-	
-	<delete id="delete">
-		delete tbl_board 
-		where bno=#{bno}
-	</delete>
-	
-	<update id="update">
-		update 
-			tbl_board
-		set 
-			title=#{title},
-			content=#{content},
-			writer=#{writer},
-			updateDate=sysdate
-		where
-			bno=#{bno}
-	</update>
-	
-	<select id="getTotalCount" resultType="int">
-		select 
-			count(*)
-		from 
-			tbl_board
-		where bno>0
-	</select>
-
-	<select id="findData" resultType="com.practice.domain.BoardVO">
-		<![CDATA[
 	
 			select 
 				bno,title,content,writer,regdate,updatedate
@@ -138,6 +68,48 @@
 			)
 			where rn> #{start}
 		]]>
+	</select>
+	
+	<insert id="insertSelectKey">
+		<!-- bno에다 결과값 넣음 -->
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+			select seq_board.nextval 
+			from dual
+		</selectKey>
+		
+		insert into tbl_board (bno,title,content,writer)
+		values (#{bno},#{title},#{content},#{writer})
+	</insert>
+	
+	<select id="read" resultType="com.practice.domain.BoardVO">
+		select * 
+		from tbl_board 
+		where bno=#{bno}
+	</select>
+	
+	<delete id="delete">
+		delete tbl_board 
+		where bno=#{bno}
+	</delete>
+	
+	<update id="update">
+		update 
+			tbl_board
+		set 
+			title=#{title},
+			content=#{content},
+			writer=#{writer},
+			updateDate=sysdate
+		where
+			bno=#{bno}
+	</update>
+	
+	<select id="getTotalCount" resultType="int">
+		select 
+			count(*)
+		from 
+			tbl_board
+		where bno>0
 	</select>
 
 </mapper>

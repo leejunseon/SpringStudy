@@ -104,11 +104,10 @@
 			"stateSave": true,
 			"serverSide":true,
 			"processing":true,
-			"searchDelay": 1000,
 			"order": [],
 			"pagingType":"full_numbers",
 			"ajax":{
-				"url":"/board/example",
+				"url":"/board/tableSetting",
 				"type":"POST",
 				"dataSrc":function(res){
 					var data=res.data;

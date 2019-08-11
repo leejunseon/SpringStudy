@@ -32,9 +32,9 @@ public class BoardController {
 	
 	private BoardService service;
 	
-	@PostMapping(value="/example",produces=MediaType.APPLICATION_JSON_UTF8_VALUE) 
+	@PostMapping(value="/tableSetting",produces=MediaType.APPLICATION_JSON_UTF8_VALUE) 
 	@ResponseBody 
-	public ResponseEntity<DataTableDto> example(DataTableDto dto, @RequestBody MultiValueMap<String, String> formData){ 
+	public ResponseEntity<DataTableDto> tableSetting(DataTableDto dto, @RequestBody MultiValueMap<String, String> formData){ 
 	    int draw = Integer.parseInt(formData.get("draw").get(0)); 
 	    String start = formData.get("start").get(0); 
 	    String length = formData.get("length").get(0); 
@@ -55,7 +55,7 @@ public class BoardController {
 	    //4 : updatedate
 	    
 	    int total = service.getTotal(); 
-	    List<BoardVO> data = service.findData(paging); 
+	    List<BoardVO> data = service.getList(paging); 
 
 	    dto.setDraw(draw); 
 	    dto.setRecordsFiltered(total); 

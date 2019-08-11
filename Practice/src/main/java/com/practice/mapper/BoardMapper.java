@@ -6,9 +6,9 @@ import com.practice.domain.BoardVO;
 import com.practice.domain.PagingDto;
 
 public interface BoardMapper {
+			
+	public List<BoardVO> getList(PagingDto pagingDto);
 	
-	public List<BoardVO> getList();
-		
 	public void insert(BoardVO board);
 	
 	public void insertSelectKey(BoardVO board);
@@ -21,5 +21,4 @@ public interface BoardMapper {
 	
 	public int getTotalCount();
 
-	public List<BoardVO> findData(PagingDto pagingDto);
 }
