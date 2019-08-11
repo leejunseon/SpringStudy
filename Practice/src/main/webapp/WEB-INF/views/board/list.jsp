@@ -104,6 +104,7 @@
 			"stateSave": true,
 			"serverSide":true,
 			"processing":true,
+			"searchDelay": 1000,
 			"order": [],
 			"pagingType":"full_numbers",
 			"ajax":{

@@ -38,10 +38,15 @@ public class BoardController {
 	    int draw = Integer.parseInt(formData.get("draw").get(0)); 
 	    String start = formData.get("start").get(0); 
 	    String length = formData.get("length").get(0); 
-	    String orderNum=formData.get("order[0][column]").get(0);
-	    String orderDir=formData.get("order[0][dir]").get(0);
+	    String orderNum=null;
+	    String orderDir=null;
+	    if(formData.containsKey("order[0][column]")) {
+	    	orderNum=formData.get("order[0][column]").get(0);
+	    	orderDir=formData.get("order[0][dir]").get(0);
+	    }
+	    String search=formData.get("search[value]").get(0);
 	    
-	    PagingDto paging=new PagingDto(start,length,orderNum,orderDir);
+	    PagingDto paging=new PagingDto(start,length,orderNum,orderDir,search);
 	    //orderNum
 	    //0 : bno
 	    //1 : title

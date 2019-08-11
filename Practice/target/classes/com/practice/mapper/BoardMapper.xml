@@ -76,43 +76,68 @@
 
 	<select id="findData" resultType="com.practice.domain.BoardVO">
 		<![CDATA[
+	
 			select 
 				bno,title,content,writer,regdate,updatedate
 			from(
 				select /*+ index_desc(tbl_board pk_board) */
 					rownum rn,bno,title,content,writer,regdate,updatedate
 				from
-					tbl_board
+				]]>
+				<choose>
+					<when test="orderNum==null">
+						tbl_board
+					</when>
+					<when test="orderNum!=null">
+					(
+						select /*+ index_desc(tbl_board pk_board) */
+                			rownum rn,bno,title,content,writer,regdate,updatedate
+            			from 
+                			tbl_board
+                			<if test="search!=null">
+								 where
+            						(title like '%'||#{search}||'%' or 
+            						 bno like '%'||#{search}||'%' or 
+            						 content like '%'||#{search}||'%')
+							</if>
+	          				<choose>
+								<when test="orderNum!=null">
+									<choose>
+										<when test="orderNum=='0'.toString()">
+											order by bno
+										</when>
+										<when test="orderNum=='1'.toString()">
+											order by title
+										</when>
+										<when test="orderNum=='2'.toString()">
+											order by writer
+										</when>
+										<when test="orderNum=='3'.toString()">
+											order by regdate
+										</when>
+										<when test="orderNum=='4'.toString()">
+											order by updatedate
+										</when>
+									</choose>
+									
+									<choose>
+										<when test="orderDir=='asc'">
+											asc
+										</when>
+										<when test="orderDir='desc'">
+											desc
+										</when>
+									</choose>
+								</when>
+							</choose>
+						)
+					</when>
+				</choose>
+				<![CDATA[
 				where rownum<= #{start} + #{length}
 			)
 			where rn> #{start}
 		]]>
-			<choose>
-				<when test="orderNum=='0'.toString()">
-					order by bno
-				</when>
-				<when test="orderNum=='1'.toString()">
-					order by title
-				</when>
-				<when test="orderNum=='2'.toString()">
-					order by writer
-				</when>
-				<when test="orderNum=='3'.toString()">
-					order by regdate
-				</when>
-				<when test="orderNum=='4'.toString()">
-					order by updatedate
-				</when>
-			</choose>
-			
-			<choose>
-				<when test="orderDir=='asc'">
-					asc
-				</when>
-				<when test="orderDir='desc'">
-					desc
-				</when>
-			</choose>
 	</select>
 
 </mapper>

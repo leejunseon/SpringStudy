@@ -10,4 +10,5 @@ public class PagingDto {
     private String length; 
     private String orderNum;
     private String orderDir;
+    private String search;
 }
