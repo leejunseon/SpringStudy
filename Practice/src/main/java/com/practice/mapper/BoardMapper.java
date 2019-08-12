@@ -8,9 +8,7 @@ import com.practice.domain.PagingDto;
 public interface BoardMapper {
 			
 	public List<BoardVO> getList(PagingDto pagingDto);
-	
-	public void insert(BoardVO board);
-	
+		
 	public void insertSelectKey(BoardVO board);
 	
 	public BoardVO read(Long bno);

@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.practice.domain.BoardVO;
+import com.practice.domain.PagingDto;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -23,21 +24,10 @@ public class BoardMapperTests {
 	
 	/*@Test
 	public void testGetList() {
-		mapper.getList().forEach(board->log.info(board));
+		PagingDto pDto=new PagingDto("0","10","1","asc",null);
+		mapper.getList(pDto).forEach(board->log.info(board));
 	}*/
-	
-	/*@Test
-	public void testInsert() {
-		BoardVO board=new BoardVO();
-		board.setTitle("새로 작성하는 글");
-		board.setContent("새로 작성하는 글");
-		board.setWriter("newbie");
 		
-		mapper.insert(board);
-		
-		log.info(board);
-	}*/
-	
 	/*@Test
 	public void testInsertSelectKey() {
 		BoardVO board=new BoardVO();
@@ -72,12 +62,10 @@ public class BoardMapperTests {
 		log.info("UPDATE COUNT: "+count);
 	}*/
 	
-	/*@Test
-	public void testPaging() {
-		Criteria cri=new Criteria();
-		cri.setPageNum(3);
-		cri.setAmount(10);
-		List<BoardVO> list=mapper.getListWithPaging(cri);
-		list.forEach(board->log.info(board));
-	}*/
+	@Test
+	public void testGetTotal() {
+		int total=mapper.getTotalCount();
+		log.info("total: "+total);
+	}
+	
 }

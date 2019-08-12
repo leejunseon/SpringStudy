@@ -2,9 +2,7 @@ package com.practice.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -34,7 +32,7 @@ public class BoardController {
 	
 	@PostMapping(value="/tableSetting",produces=MediaType.APPLICATION_JSON_UTF8_VALUE) 
 	@ResponseBody 
-	public ResponseEntity<DataTableDto> tableSetting(DataTableDto dto, @RequestBody MultiValueMap<String, String> formData){ 
+	public DataTableDto tableSetting(DataTableDto dto, @RequestBody MultiValueMap<String, String> formData){ 
 	    int draw = Integer.parseInt(formData.get("draw").get(0)); 
 	    String start = formData.get("start").get(0); 
 	    String length = formData.get("length").get(0); 
@@ -62,7 +60,7 @@ public class BoardController {
 	    dto.setRecordsTotal(total); 
 	    dto.setData(data); 
 
-	    return new ResponseEntity<>(dto,HttpStatus.OK); 
+	    return dto;
 	}
 
 	@GetMapping("/list")

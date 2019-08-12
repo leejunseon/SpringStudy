@@ -36,16 +36,29 @@
        		<button data-oper='list' class="btn btn-info btn-icon-split">
        			<span class="text">List</span>
        		</button>
-       		
+       		     		
        		<form id='operForm' action="/board/modify" method="get">
        			<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno }"/>'>
        		</form>
         </div>
-	</div>
+sw	</div>
 </div>
 
+<script type="text/javascript" src="/resources/js/reply.js?ver=1"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	var bnoValue='<c:out value="${board.bno}"/>';
+	replyService.getList(
+		{bno:bnoValue,page:1}
+		,
+		function(list){
+			for(var i=0,len=list.length||0;i<len;i++){
+				console.log(list[i]);
+			}
+		}
+	);
+	
 	var operForm=$("#operForm");
 	
 	$("button[data-oper='modify']").on("click",function(e){

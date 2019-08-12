@@ -1,5 +1,7 @@
 package com.practice.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.Setter;
@@ -32,16 +36,6 @@ public class BoardControllerTests {
 	public void setup() {
 		this.mockMvc=MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
-	
-	/*@Test
-	public void testList() throws Exception{
-		log.info(
-			mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
-			.andReturn()
-			.getModelAndView()
-			.getModelMap()
-		);
-	}*/
 	
 	/*@Test
 	public void testRegister() throws Exception{
@@ -88,13 +82,4 @@ public class BoardControllerTests {
 		log.info(resultPage);
 	}*/
 	
-	/*@Test
-	public void testListPaging() throws Exception{
-		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
-									.param("pageNum", "2")
-									.param("amount", "50")
-									).andReturn()
-									.getModelAndView()
-									.getModelMap());
-	}*/
 }

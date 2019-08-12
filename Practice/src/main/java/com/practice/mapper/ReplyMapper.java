@@ -1,5 +1,20 @@
 package com.practice.mapper;
 
-public class ReplyMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.practice.domain.ReplyVO;
+
+public interface ReplyMapper {
+	
+	public int insert(ReplyVO vo);
+	
+	public ReplyVO read(Long rno);
+	
+	public int delete(Long rno);
+	
+	public int update(ReplyVO reply);
+	
+	public List<ReplyVO> getReplies(@Param("bno")Long bno);
 }
