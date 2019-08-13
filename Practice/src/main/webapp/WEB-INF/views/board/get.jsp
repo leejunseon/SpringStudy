@@ -41,23 +41,22 @@
        			<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno }"/>'>
        		</form>
         </div>
-sw	</div>
+	</div>
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+        	<i class="fa fa-comments fa-fw"></i>Reply
+        </div>
+        <div class="card-body">
+        	<ul class="chat" style="list-style-type:none;">
+        	</ul>
+        </div>
+	</div>
 </div>
 
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script type="text/javascript" src="/resources/js/reply.js?ver=1"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
-	var bnoValue='<c:out value="${board.bno}"/>';
-	replyService.getList(
-		{bno:bnoValue,page:1}
-		,
-		function(list){
-			for(var i=0,len=list.length||0;i<len;i++){
-				console.log(list[i]);
-			}
-		}
-	);
 	
 	var operForm=$("#operForm");
 	
@@ -70,6 +69,44 @@ $(document).ready(function(){
 		operForm.attr("action","/board/list");
 		operForm.submit();
 	});	
+	
+	var bnoValue='<c:out value="${board.bno}"/>';
+	var replyUL=$(".chat");
+	showList(1);
+	
+	function showList(page){
+		replyService.getReplies(
+			{bno:bnoValue,page:page||1}
+			,
+			function(list){
+				var str="";
+				if(list==null||list.length==0){
+					replyUL.html("");
+					return;
+				}
+				for(var i=0,len=list.length||0;i<len;i++){
+					str+="<li data-rno='"+list[i].rno+"'>";
+					str+="<div><div class='header'>";
+					str+="<strong class='primary-font'>"+list[i].replyer+"</strong>";
+					str+="<small class='fa-pull-right text-muted'>"+displayTime(list[i].replyDate)+"</small></div>";
+					str+="<p>"+list[i].reply+"</p><hr></div></li>";
+				}
+				replyUL.html(str);
+			}
+		);
+	}
+	
+	function displayTime(time){
+		var today=new Date();
+		var gap=today.getTime()-time;
+		var dateObj=new Date(time);
+				
+		if(gap<(1000*60*60*24)){
+			return moment(time).format('h:mm:ss a');
+		}else{
+			return moment(time).format('YYYY-MM-DD');
+		}
+	}
 });
 </script>
 <%@include file="../includes/footer.jsp" %>

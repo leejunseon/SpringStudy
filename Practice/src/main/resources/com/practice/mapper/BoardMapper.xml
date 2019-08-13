@@ -26,7 +26,8 @@
                 			tbl_board
                 			<if test="search!=''">
 								 where
-            						(title like '%'||#{search}||'%' or 
+            						(bno like '%'||#{search}||'%' or 
+            						 title like '%'||#{search}||'%' or 
             						 bno like '%'||#{search}||'%' or 
             						 content like '%'||#{search}||'%')
 							</if>
