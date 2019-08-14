@@ -46,18 +46,28 @@
 		<div class="card-header py-3">
         	<i class="fa fa-comments fa-fw"></i>Reply
         </div>
+         <div class="card-body">
+			<div class="form-group">
+				<textarea class="form-control" id='reply' rows="3" placeholder="Leave comments here"></textarea>
+			</div>
+			<button id='replyRegisterBtn' type="submit" class="btn btn-success btn-icon-split fa-pull-right">
+				<span class="text"><i class="fa fa-share"></i> Register</span>
+			</button>
+		</div>
+		<hr>
         <div class="card-body">
-        	<ul class="chat" style="list-style-type:none;">
+        	<ul class="chat" style="list-style-type:none; padding-left:15px;">
+        	
         	</ul>
         </div>
-	</div>
+    </div>
 </div>
-
+ 
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script type="text/javascript" src="/resources/js/reply.js?ver=1"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
+
 	var operForm=$("#operForm");
 	
 	$("button[data-oper='modify']").on("click",function(e){
@@ -85,10 +95,13 @@ $(document).ready(function(){
 					return;
 				}
 				for(var i=0,len=list.length||0;i<len;i++){
-					str+="<li data-rno='"+list[i].rno+"'>";
+					var date=displayTime(list[i].replyDate);
+					str+="<li id='"+list[i].rno+"'>";
 					str+="<div><div class='header'>";
 					str+="<strong class='primary-font'>"+list[i].replyer+"</strong>";
-					str+="<small class='fa-pull-right text-muted'>"+displayTime(list[i].replyDate)+"</small></div>";
+					str+='<a href="javascript:void(0)" onclick="editReply('+list[i].rno+',\''+list[i].replyer+'\',\''+list[i].reply+'\')" style="padding-left:15px">수정</a>';
+					str+="<a href=# style='padding-left:15px;'>삭제</a>";
+					str+="<small class='fa-pull-right text-muted'>"+date+"</small></div>";
 					str+="<p>"+list[i].reply+"</p><hr></div></li>";
 				}
 				replyUL.html(str);
@@ -107,6 +120,35 @@ $(document).ready(function(){
 			return moment(time).format('YYYY-MM-DD');
 		}
 	}
+	
+	$("#replyRegisterBtn").on("click",function(e){
+		var reply={
+				reply:$("#reply").val(),
+				replyer:"replyer",
+				bno:bnoValue
+				};
+		
+		replyService.add(reply,function(result){
+			alert(result);
+			$("#reply").val("");
+			showList(1);
+		});
+	});
+	
+	function editReply(rno,writer,content){
+		var str="";
+		var reply=$("#"+rno);
+		
+		str+="<li id='"+rno+"'>";
+		str+="<div class='header'>";
+		str+="<strong class='primary-font'>"+writer+"</strong>";
+		str+="<a href=# style='padding-left:15px;'>저장</a>";
+		str+="<a href=# style='padding-left:15px;'>취소</a>";
+		str+="<textarea>"+content+"</textarea><hr></div></li>";
+		
+		reply.html(str);
+	}
+	
 });
 </script>
 <%@include file="../includes/footer.jsp" %>
