@@ -57,7 +57,6 @@
 		<hr>
         <div class="card-body">
         	<ul class="chat" style="list-style-type:none; padding-left:15px;">
-        	
         	</ul>
         </div>
     </div>
@@ -109,18 +108,6 @@ $(document).ready(function(){
 		);
 	}
 	
-	function displayTime(time){
-		var today=new Date();
-		var gap=today.getTime()-time;
-		var dateObj=new Date(time);
-				
-		if(gap<(1000*60*60*24)){
-			return moment(time).format('h:mm:ss a');
-		}else{
-			return moment(time).format('YYYY-MM-DD');
-		}
-	}
-	
 	$("#replyRegisterBtn").on("click",function(e){
 		var reply={
 				reply:$("#reply").val(),
@@ -135,21 +122,34 @@ $(document).ready(function(){
 		});
 	});
 	
-	function editReply(rno,writer,content){
-		var str="";
-		var reply=$("#"+rno);
-		
-		str+="<li id='"+rno+"'>";
-		str+="<div class='header'>";
-		str+="<strong class='primary-font'>"+writer+"</strong>";
-		str+="<a href=# style='padding-left:15px;'>저장</a>";
-		str+="<a href=# style='padding-left:15px;'>취소</a>";
-		str+="<textarea>"+content+"</textarea><hr></div></li>";
-		
-		reply.html(str);
-	}
-	
 });
+
+function displayTime(time){
+	var today=new Date();
+	var gap=today.getTime()-time;
+	var dateObj=new Date(time);
+			
+	if(gap<(1000*60*60*24)){
+		return moment(time).format('h:mm:ss a');
+	}else{
+		return moment(time).format('YYYY-MM-DD');
+	}
+}
+
+function editReply(rno,writer,content){
+	var str="";
+	var reply=$("#"+rno);
+	
+	str+="<li id='"+rno+"'>";
+	str+="<div class='header'>";
+	str+="<strong class='primary-font'>"+writer+"</strong>";
+	str+="<a href=# style='padding-left:15px;'>저장</a>";
+	str+="<a href=# style='padding-left:15px;'>취소</a>";
+	str+="<div class='form-group'><textarea class='form-control'>"+content+"</textarea></div><hr></div></li>";
+	
+	reply.html(str);
+}
+
 </script>
 <%@include file="../includes/footer.jsp" %>
 
