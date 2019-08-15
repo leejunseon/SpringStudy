@@ -68,6 +68,9 @@
 $(document).ready(function(){
 
 	var operForm=$("#operForm");
+	var bnoValue='<c:out value="${board.bno}"/>';
+	
+	showList(1);
 	
 	$("button[data-oper='modify']").on("click",function(e){
 		operForm.attr("action","/board/modify").submit();
@@ -79,35 +82,6 @@ $(document).ready(function(){
 		operForm.submit();
 	});	
 	
-	var bnoValue='<c:out value="${board.bno}"/>';
-	var replyUL=$(".chat");
-	showList(1);
-	
-	function showList(page){
-		replyService.getReplies(
-			{bno:bnoValue,page:page||1}
-			,
-			function(list){
-				var str="";
-				if(list==null||list.length==0){
-					replyUL.html("");
-					return;
-				}
-				for(var i=0,len=list.length||0;i<len;i++){
-					var date=displayTime(list[i].replyDate);
-					str+="<li id='"+list[i].rno+"'>";
-					str+="<div><div class='header'>";
-					str+="<strong class='primary-font'>"+list[i].replyer+"</strong>";
-					str+='<a href="javascript:void(0)" onclick="editReply('+list[i].rno+',\''+list[i].replyer+'\',\''+list[i].reply+'\')" style="padding-left:15px">수정</a>';
-					str+="<a href=# style='padding-left:15px;'>삭제</a>";
-					str+="<small class='fa-pull-right text-muted'>"+date+"</small></div>";
-					str+="<p>"+list[i].reply+"</p><hr></div></li>";
-				}
-				replyUL.html(str);
-			}
-		);
-	}
-	
 	$("#replyRegisterBtn").on("click",function(e){
 		var reply={
 				reply:$("#reply").val(),
@@ -115,14 +89,45 @@ $(document).ready(function(){
 				bno:bnoValue
 				};
 		
-		replyService.add(reply,function(result){
-			alert(result);
-			$("#reply").val("");
-			showList(1);
-		});
+		replyService.add(
+			reply
+			,
+			function(result){
+				alert(result);
+				$("#reply").val("");
+				showList(1);
+			}
+		);
 	});
 	
 });
+
+var bnoValue='<c:out value="${board.bno}"/>';
+var replyUL=$(".chat");
+function showList(page){
+	replyService.getReplies(
+		{bno:bnoValue,page:page||1}
+		,
+		function(list){
+			var str="";
+			if(list==null||list.length==0){
+				replyUL.html("");
+				return;
+			}
+			for(var i=0,len=list.length||0;i<len;i++){
+				var date=displayTime(list[i].updateDate);
+				str+="<li id='"+list[i].rno+"'>";
+				str+="<div><div class='header'>";
+				str+="<strong class='primary-font'>"+list[i].replyer+"</strong>";
+				str+="<a href='javascript:void(0)' onclick='editReply("+list[i].rno+",\""+list[i].replyer+"\",\""+list[i].reply+"\")' style='padding-left:15px'>수정</a>";
+				str+="<a href='javascript:void(0)' onclick='removeReply("+list[i].rno+")' style='padding-left:15px;'>삭제</a>";
+				str+="<small class='fa-pull-right text-muted'>"+date+"</small></div>";
+				str+="<p>"+list[i].reply+"</p><hr></div></li>";
+			}
+			replyUL.html(str);
+		}
+	);
+}
 
 function displayTime(time){
 	var today=new Date();
@@ -143,11 +148,41 @@ function editReply(rno,writer,content){
 	str+="<li id='"+rno+"'>";
 	str+="<div class='header'>";
 	str+="<strong class='primary-font'>"+writer+"</strong>";
-	str+="<a href=# style='padding-left:15px;'>저장</a>";
-	str+="<a href=# style='padding-left:15px;'>취소</a>";
-	str+="<div class='form-group'><textarea class='form-control'>"+content+"</textarea></div><hr></div></li>";
+	str+="<a href='javascript:void(0)' onclick='updateReply("+rno+")' style='padding-left:15px;'>저장</a>";
+	str+="<a href='javascript:void(0)' onclick='showList(1)' style='padding-left:15px;'>취소</a>";
+	str+="<div class='form-group'><textarea id='updated' class='form-control'>"+content+"</textarea></div><hr></div></li>";
 	
 	reply.html(str);
+}
+
+function removeReply(rno){
+	replyService.remove(
+		rno
+		,
+		function(result){
+			alert(result);
+			$("#reply").val("");
+			showList(1);
+		}
+	);
+}
+
+function updateReply(rno){
+	var reply={
+		rno:rno,
+		reply:$("#updated").val(),
+		bno:bnoValue
+	};
+	
+	replyService.update(
+		reply
+		,
+		function(result){
+			alert(result);
+			$("#reply").val("");
+			showList(1);
+		}
+	);
 }
 
 </script>
