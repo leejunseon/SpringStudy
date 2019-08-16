@@ -3,11 +3,11 @@ package com.practice.service;
 import java.util.List;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.PagingDto;
+import com.practice.domain.BoardPagingDto;
 
 public interface BoardService {
 
-	public List<BoardVO> getList(PagingDto pagingDto);
+	public List<BoardVO> getList(BoardPagingDto BoardPagingDto);
 
 	public void register(BoardVO board);
 	

@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.PagingDto;
+import com.practice.domain.BoardPagingDto;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -30,7 +30,7 @@ public class BoardServiceTests {
 	
 	/*@Test
 	public void testGetList() {
-		service.getList(new PagingDto("0","10","1","asc",null)).forEach(board->log.info(board));
+		service.getList(new BoardPagingDto("0","10","1","asc",null)).forEach(board->log.info(board));
 	}*/
 	
 	/*@Test

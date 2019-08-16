@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PagingDto {
+public class BoardPagingDto {
     private String start;
     private String length; 
     private String orderNum;

@@ -32,7 +32,7 @@ var replyService=(function(){
 			dataType:'json',
 			success:function(result){
 				if(callback)
-					callback(result);
+					callback(result.replyCnt,result.list);
 			},
 			error:function(xhr,status,er){
 				if(error){

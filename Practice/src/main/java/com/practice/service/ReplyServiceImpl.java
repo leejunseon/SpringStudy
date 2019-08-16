@@ -1,10 +1,10 @@
 package com.practice.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.practice.domain.Replies;
+import com.practice.domain.ReplyPagingDto;
 import com.practice.domain.ReplyVO;
 import com.practice.mapper.ReplyMapper;
 
@@ -47,10 +47,10 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public List<ReplyVO> getReplies(Long bno) {
+	public Replies getReplies(Long bno,ReplyPagingDto paging) {
 		// TODO Auto-generated method stub
-		log.info("get Replies:"+bno);
-		return mapper.getReplies(bno);
+		log.info("get Replies:"+paging);
+		return new Replies(mapper.getCountByBno(bno),mapper.getReplies(bno,paging));
 	}
 
 }

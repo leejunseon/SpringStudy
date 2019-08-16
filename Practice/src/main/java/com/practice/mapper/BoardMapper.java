@@ -3,11 +3,11 @@ package com.practice.mapper;
 import java.util.List;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.PagingDto;
+import com.practice.domain.BoardPagingDto;
 
 public interface BoardMapper {
 			
-	public List<BoardVO> getList(PagingDto pagingDto);
+	public List<BoardVO> getList(BoardPagingDto BoardPagingDto);
 		
 	public void insertSelectKey(BoardVO board);
 	

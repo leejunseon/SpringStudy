@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.practice.domain.ReplyPagingDto;
 import com.practice.domain.ReplyVO;
 
 import lombok.Setter;
@@ -62,10 +63,11 @@ public class ReplyMapperTests {
 		log.info("update count : "+count);
 	}*/
 	
-	/*@Test
+	@Test
 	public void testList() {
-		List<ReplyVO> replies=mapper.getReplies(393421L);
+		ReplyPagingDto paging=new ReplyPagingDto(1,10);
+		List<ReplyVO> replies=mapper.getReplies(393401L,paging);
 		replies.forEach(reply->log.info(reply));
-	}*/
+	}
 
 }

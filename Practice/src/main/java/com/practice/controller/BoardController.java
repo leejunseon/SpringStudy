@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.practice.domain.BoardVO;
 import com.practice.domain.DataTableDto;
-import com.practice.domain.PagingDto;
+import com.practice.domain.BoardPagingDto;
 import com.practice.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -44,7 +44,7 @@ public class BoardController {
 	    }
 	    String search=formData.get("search[value]").get(0);
 	    
-	    PagingDto paging=new PagingDto(start,length,orderNum,orderDir,search);
+	    BoardPagingDto paging=new BoardPagingDto(start,length,orderNum,orderDir,search);
 	    //orderNum
 	    //0 : bno
 	    //1 : title

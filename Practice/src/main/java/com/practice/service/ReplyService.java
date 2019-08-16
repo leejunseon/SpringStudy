@@ -1,7 +1,7 @@
 package com.practice.service;
 
-import java.util.List;
-
+import com.practice.domain.Replies;
+import com.practice.domain.ReplyPagingDto;
 import com.practice.domain.ReplyVO;
 
 public interface ReplyService {
@@ -14,5 +14,5 @@ public interface ReplyService {
 	
 	public int remove(Long rno);
 	
-	public List<ReplyVO> getReplies(Long bno);
+	public Replies getReplies(Long bno, ReplyPagingDto paging);
 }

@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.practice.domain.BoardVO;
-import com.practice.domain.PagingDto;
+import com.practice.domain.BoardPagingDto;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -24,7 +24,7 @@ public class BoardMapperTests {
 	
 	/*@Test
 	public void testGetList() {
-		PagingDto pDto=new PagingDto("0","10","1","asc",null);
+		BoardPagingDto pDto=new BoardPagingDto("0","10","1","asc","");
 		mapper.getList(pDto).forEach(board->log.info(board));
 	}*/
 		
@@ -62,10 +62,10 @@ public class BoardMapperTests {
 		log.info("UPDATE COUNT: "+count);
 	}*/
 	
-	@Test
+	/*@Test
 	public void testGetTotal() {
 		int total=mapper.getTotalCount();
 		log.info("total: "+total);
-	}
+	}*/
 	
 }

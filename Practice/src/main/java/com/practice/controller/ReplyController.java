@@ -1,7 +1,5 @@
 package com.practice.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.practice.domain.Replies;
+import com.practice.domain.ReplyPagingDto;
 import com.practice.domain.ReplyVO;
 import com.practice.service.ReplyService;
 
@@ -37,9 +37,10 @@ public class ReplyController {
 	}
 	
 	@GetMapping(value="/pages/{bno}/{page}",produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<ReplyVO>>getList(@PathVariable("bno")Long bno,@PathVariable("page")int page){
+	public ResponseEntity<Replies>getList(@PathVariable("bno")Long bno,@PathVariable("page")int page){
 		log.info("getList:"+bno);
-		return new ResponseEntity<>(service.getReplies(bno),HttpStatus.OK);
+		ReplyPagingDto paging = new ReplyPagingDto(page, 10);
+		return new ResponseEntity<>(service.getReplies(bno,paging),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/{rno}",produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
