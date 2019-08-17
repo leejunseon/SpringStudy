@@ -121,13 +121,13 @@ function showList(page){
 	replyService.getReplies(
 		{bno:bnoValue,page:page||1}
 		,
-		function(result){
-			var replyCnt=result.replyCnt;
-			var list=result.list;
+		function(replyCnt,list){
+			var replyCnt=replyCnt;
+			var list=list;
 			
-			console.log("replyCnt: "+result.replyCnt);
+			console.log("replyCnt: "+replyCnt);
 			console.log("replies:");
-			console.log(result.list);
+			console.log(list);
 			
 			if(page==-1){
 				pageNum=Math.ceil(replyCnt/10.0);

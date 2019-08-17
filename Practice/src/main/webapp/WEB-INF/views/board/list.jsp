@@ -120,7 +120,7 @@
 				{"data": "title",
 			        "render": function(data, type, row, meta){
 						if(type === 'display'){
-			            	data = '<a href="/board/get?bno=' + row.bno + '">' + data + '</a>';
+			            	data = '<a href="/board/get?bno=' + row.bno + '">' + data + '</a><b> ['+row.replyCnt+']</b>';
 			        	}
 			            return data;
 			    	}

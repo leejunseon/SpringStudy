@@ -8,10 +8,10 @@
 		<![CDATA[
 	
 			select 
-				bno,title,content,writer,regdate,updatedate
+				bno,title,content,writer,regdate,updatedate,replycnt
 			from(
 				select /*+ index_desc(tbl_board pk_board) */
-					rownum rn,bno,title,content,writer,regdate,updatedate
+					rownum rn,bno,title,content,writer,regdate,updatedate,replycnt
 				from
 				]]>
 				<choose>
@@ -21,7 +21,7 @@
 					<when test="orderNum!=null">
 					(
 						select /*+ index_desc(tbl_board pk_board) */
-                			rownum rn,bno,title,content,writer,regdate,updatedate
+                			rownum rn,bno,title,content,writer,regdate,updatedate,replycnt
             			from 
                 			tbl_board
                 			<if test="search!=''">
@@ -111,6 +111,12 @@
 		from 
 			tbl_board
 		where bno>0
+	</select>
+	
+	<select id="updateReplyCnt">
+		update tbl_board
+		set replycnt=replycnt+#{amount}
+		where bno=#{bno}
 	</select>
 
 </mapper>

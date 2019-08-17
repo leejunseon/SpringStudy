@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ReplyVO {
+	//´ñ±Û °´Ã¼
 	private Long rno;
 	private Long bno;
 	
