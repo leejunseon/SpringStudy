@@ -99,8 +99,11 @@
 			self.location="/board/register";
 		});
 		
+		/* var csrfParameter=${_csrf.parameterName};
+		var token=${_csrf.token}; */
+		
 		//dataTables 서버사이드 구현
-		$('#dataTable').dataTable( {			
+		$('#dataTable').dataTable( {	
 			"stateSave": true,
 			"serverSide":true,
 			"processing":true,
@@ -109,6 +112,10 @@
 			"ajax":{
 				"url":"/board/tableSetting",
 				"type":"POST",
+			 	"beforeSend" : function(xhr){   
+			 		//데이터를 전송하기 전에 헤더에 csrf값을 설정한다.
+                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
 				"dataSrc":function(res){
 					var data=res.data;
 					return data;
