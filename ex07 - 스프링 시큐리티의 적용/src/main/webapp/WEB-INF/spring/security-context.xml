@@ -8,14 +8,10 @@
 
 
 	<bean id="customAccessDenied" class="org.zerock.security.CustomAccessDeniedHandler"></bean>
-	<!-- <bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean> -->
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>	
 	<bean id="customUserDetailsService" class="org.zerock.security.CustomUserDetailsService"></bean>
 
 	<security:http>
-		<!-- <security:intercept-url pattern="/sample/all"	access="permitAll" />
-		<security:intercept-url	pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
-		<security:intercept-url pattern="/sample/admin"	access="hasRole('ROLE_ADMIN')" /> -->
 		<security:access-denied-handler	ref="customAccessDenied" />
 		<security:form-login login-page="/customLogin"/>
 		<security:logout logout-url="/customLogout"	invalidate-session="true" />
