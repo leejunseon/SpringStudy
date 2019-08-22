@@ -28,7 +28,7 @@ public class MemberTests {
 	@Setter(onMethod_=@Autowired)
 	private DataSource ds;
 	
-	@Test
+	/*@Test
 	public void testInsertMember() {
 		
 		String sql="insert into tbl_member(userid,userpw,username) values (?,?,?)";
@@ -51,7 +51,7 @@ public class MemberTests {
 			if(pstmt!=null) {try {pstmt.close();}catch(Exception e) {}}
 			if(con!=null) {try{con.close();}catch(Exception e) {}}
 		}
-	}
+	}*/
 	
 	@Test
 	public void testInsertAuth() {

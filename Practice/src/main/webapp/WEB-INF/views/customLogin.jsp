@@ -48,12 +48,12 @@
                     <div class="form-group">
                       <input type="password" name='password' value='admin' class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                     </div>
-                   <!--  <div class="form-group">
+                    <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="remember-me">
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
-                    </div> -->
+                    </div>
                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Login">
                     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
                    <!--  <hr>

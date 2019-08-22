@@ -28,6 +28,9 @@
 	<logger name="com.practice.service">
 		<level value="info" />
 	</logger>
+	<logger name="com.practice.security">
+		<level value="info" />
+	</logger>
 
 	<!-- Query Loggers -->
 	<logger name="jdbc.sqlonly" additivity="false">

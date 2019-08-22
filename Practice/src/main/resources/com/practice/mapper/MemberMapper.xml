@@ -4,8 +4,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.practice.mapper.MemberMapper">
 	
-	<resultMap type="com.practice.domain.MemberVO" id="memberMap">
-		<id property="userid" column="userid"/>
+	<resultMap type="com.practice.domain.MemberVO" id="memberMap">	
+		<!-- <id property="userid" column="userid"/> -->
 		<result property="userid" column="userid"/>
 		<result property="userpw" column="userpw"/>
 		<result property="userName" column="username"/>
