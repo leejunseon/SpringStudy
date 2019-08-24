@@ -3,6 +3,7 @@ package com.practice.controller;
 import java.util.List;
 
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -68,6 +69,7 @@ public class BoardController {
 		log.info("list");
 	}
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/register")
 	public void register() {
 		
@@ -81,6 +83,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno")Long bno,Model model) {//@RequestParam 생략해도 무방. 파라미터 이름과 변수 이름을 기준으로 동작하기 때문
 		log.info("get or modify: "+bno);

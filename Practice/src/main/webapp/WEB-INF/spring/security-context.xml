@@ -10,8 +10,6 @@
 	<bean id="customUserDetailsService" class="com.practice.security.CustomUserDetailsService"></bean>
 
 	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/board/list*" access="permitAll"/>
-		<security:intercept-url pattern="/board/get*" access="hasRole('ROLE_MEMBER')"/>
 		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
 		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
 		<security:access-denied-handler ref="customAccessDenied"/>
