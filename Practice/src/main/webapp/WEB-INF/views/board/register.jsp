@@ -24,9 +24,10 @@
         		</div>
         		<div class="form-group">
         			<label>Writer</label>
-        			<input class="form-control" name='writer'>
+        			<input class="form-control" name='writer' value='<sec:authentication property="principal.username"/>' readonly="readonly">
         		</div>
         		
+        		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
         		<button type="submit" class="btn btn-primary btn-icon-split">
         			<span class="text">Submit</span>
         		</button>

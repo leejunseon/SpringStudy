@@ -88,7 +88,9 @@ $(document).ready(function(){
 		var reply={
 				reply:$("#reply").val(),
 				replyer:"replyer",
-				bno:bnoValue
+				bno:bnoValue,
+				csrf_header:"${_csrf.headerName}",
+				csrf_token:"${_csrf.token }"
 				};
 		
 		replyService.add(
@@ -221,6 +223,11 @@ function editReply(rno,writer,content){
 }
 
 function removeReply(rno){
+	var rno={
+		rno:rno,
+		csrf_header:"${_csrf.headerName}",
+		csrf_token:"${_csrf.token }"
+	};
 	replyService.remove(
 		rno
 		,
@@ -236,9 +243,10 @@ function updateReply(rno){
 	var reply={
 		rno:rno,
 		reply:$("#updated").val(),
-		bno:bnoValue
+		bno:bnoValue,
+		csrf_header:"${_csrf.headerName}",
+		csrf_token:"${_csrf.token }"
 	};
-	
 	replyService.update(
 		reply
 		,

@@ -10,6 +10,10 @@ var replyService=(function(){
 			url:'/replies/new',
 			data:JSON.stringify(reply),
 			contentType:"application/json;charset=utf-8",
+			"beforeSend" : function(xhr){   
+		 		//데이터를 전송하기 전에 헤더에 csrf값을 설정한다.
+                xhr.setRequestHeader(reply.csrf_header, reply.csrf_token);
+            },
 			success:function(result,status,xhr){
 				if(callback){
 					callback(result);
@@ -47,7 +51,11 @@ var replyService=(function(){
 		
 		$.ajax({
 			type:'delete',
-			url:'/replies/'+rno,
+			url:'/replies/'+rno.rno,
+			"beforeSend" : function(xhr){   
+		 		//데이터를 전송하기 전에 헤더에 csrf값을 설정한다.
+                xhr.setRequestHeader(rno.csrf_header, rno.csrf_token);
+            },
 			success:function(deleteResult,status,xhr){
 				if(callback){
 					callback(deleteResult);
@@ -68,6 +76,10 @@ var replyService=(function(){
 			type:'put',
 			url:'/replies/'+reply.rno,
 			data:JSON.stringify(reply),
+			"beforeSend" : function(xhr){   
+		 		//데이터를 전송하기 전에 헤더에 csrf값을 설정한다.
+                xhr.setRequestHeader(reply.csrf_header, reply.csrf_token);
+            },
 			contentType:'application/json; charset=utf-8',
 			success:function(result,status,xhr){
 				if(callback){

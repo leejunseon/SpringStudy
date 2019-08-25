@@ -98,9 +98,6 @@
 			self.location="/board/register";
 		});
 		
-		/* var csrfParameter=${_csrf.parameterName};
-		var token=${_csrf.token}; */
-		
 		//dataTables 서버사이드 구현
 		$('#dataTable').dataTable( {	
 			"stateSave": true,

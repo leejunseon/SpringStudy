@@ -75,6 +75,7 @@ public class BoardController {
 		
 	}
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@PostMapping("/register")
 	public String register(BoardVO board,RedirectAttributes rttr) {
 		log.info("register: "+board);

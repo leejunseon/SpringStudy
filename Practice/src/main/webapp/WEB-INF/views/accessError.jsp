@@ -14,7 +14,7 @@
             <div class="error mx-auto" data-text="Access Denied">Access Denied</div>
             <p class="lead text-gray-800 mb-5"><c:out value="${msg }"/></p>
             <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-            <a href="index.html">&larr; Back to Dashboard</a>
+            <a href="/board/list">&larr; Back to Dashboard</a>
           </div>
 
         </div>
