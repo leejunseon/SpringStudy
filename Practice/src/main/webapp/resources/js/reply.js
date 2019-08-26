@@ -46,15 +46,15 @@ var replyService=(function(){
 		});
 	}
 	
-	function remove(rno,callback,error){
+	function remove(reply,callback,error){
 		console.log("remove reply");
 		
 		$.ajax({
 			type:'delete',
-			url:'/replies/'+rno.rno,
+			url:'/replies/'+reply.rno,
 			"beforeSend" : function(xhr){   
 		 		//데이터를 전송하기 전에 헤더에 csrf값을 설정한다.
-                xhr.setRequestHeader(rno.csrf_header, rno.csrf_token);
+                xhr.setRequestHeader(reply.csrf_header, reply.csrf_token);
             },
 			success:function(deleteResult,status,xhr){
 				if(callback){

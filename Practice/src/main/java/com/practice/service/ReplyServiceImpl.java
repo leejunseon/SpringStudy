@@ -10,7 +10,6 @@ import com.practice.domain.ReplyVO;
 import com.practice.mapper.BoardMapper;
 import com.practice.mapper.ReplyMapper;
 
-import lombok.Data;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -28,7 +27,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public int register(ReplyVO vo) {
 		// TODO Auto-generated method stub
-		log.info("register:"+vo);
+		log.info("ReplyService : register "+vo);
 		boardMapper.updateReplyCnt(vo.getBno(), 1);
 		return mapper.insert(vo);
 	}
@@ -36,14 +35,14 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public ReplyVO get(Long rno) {
 		// TODO Auto-generated method stub
-		log.info("get:"+rno);
+		log.info("ReplyService : get "+rno);
 		return mapper.read(rno);
 	}
 
 	@Override
 	public int modify(ReplyVO vo) {
 		// TODO Auto-generated method stub
-		log.info("modify:"+vo);
+		log.info("ReplyService : modify "+vo);
 		return mapper.update(vo);
 	}
 
@@ -51,7 +50,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public int remove(Long rno) {
 		// TODO Auto-generated method stub
-		log.info("remove:"+rno);
+		log.info("ReplyService : remove "+rno);
 		ReplyVO vo=mapper.read(rno);
 		boardMapper.updateReplyCnt(vo.getBno(), -1);
 		return mapper.delete(rno);
@@ -60,7 +59,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public Replies getReplies(Long bno,ReplyPagingDto paging) {
 		// TODO Auto-generated method stub
-		log.info("get Replies:"+paging);
+		log.info("ReplyService : getReplies "+bno);
 		return new Replies(mapper.getCountByBno(bno),mapper.getReplies(bno,paging));
 	}
 

@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="../includes/header.jsp" %>
+<sec:authentication property="principal" var="pinfo"/>
 
 <div class="container-fluid">
 	<h1 class="h3 mb-2 text-gray-800">Board Read</h1>
@@ -39,12 +41,17 @@
 	       			<input class="form-control" name='updateDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${board.updateDate }"/>' readonly="readonly">
 	       		</div>
 	       		
-	       		<button type="submit" data-oper='modify' class="btn btn-primary btn-icon-split">
-	       			<span class="text">Modify</span>
-	       		</button>
-	       		<button type="submit" data-oper='remove' class="btn btn-danger btn-icon-split">
-	       			<span class="text">Remove</span>
-	       		</button>
+	       		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+	       		<sec:authorize access="isAuthenticated()">
+		       		<c:if test="${pinfo.username eq board.writer }">
+			       		<button type="submit" data-oper='modify' class="btn btn-primary btn-icon-split">
+			       			<span class="text">Modify</span>
+			       		</button>
+			       		<button type="submit" data-oper='remove' class="btn btn-danger btn-icon-split">
+			       			<span class="text">Remove</span>
+			       		</button>
+		       		</c:if>
+	       		</sec:authorize>
 	       		<button type="submit" data-oper='list' class="btn btn-info btn-icon-split">
 	       			<span class="text">List</span>
 	       		</button>

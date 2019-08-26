@@ -34,6 +34,7 @@ public class BoardController {
 	@PostMapping(value="/tableSetting",produces=MediaType.APPLICATION_JSON_UTF8_VALUE) 
 	@ResponseBody 
 	public DataTableDto tableSetting(DataTableDto dto, @RequestBody MultiValueMap<String, String> formData){ 
+		log.info("BoardController : <Post> tableSetting");
 	    int draw = Integer.parseInt(formData.get("draw").get(0)); 
 	    String start = formData.get("start").get(0); 
 	    String length = formData.get("length").get(0); 
@@ -66,43 +67,44 @@ public class BoardController {
 
 	@GetMapping("/list")
 	public void list(Model model) {
-		log.info("list");
+		log.info("BoardController : <Get> list");
 	}
 	
-	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public void register() {
-		
+		log.info("BoardController : <Get> register");
 	}
 	
-	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@PostMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public String register(BoardVO board,RedirectAttributes rttr) {
-		log.info("register: "+board);
+		log.info("BoardController : <Post> register");
 		service.register(board);
 		rttr.addFlashAttribute("result",board.getBno());
 		return "redirect:/board/list";
 	}
 	
-	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno")Long bno,Model model) {//@RequestParam 생략해도 무방. 파라미터 이름과 변수 이름을 기준으로 동작하기 때문
-		log.info("get or modify: "+bno);
+		log.info("BoardController : <Get> get or modify "+bno);
 		model.addAttribute("board",service.get(bno));
 	}
 	
+	@PreAuthorize("principal.username==#board.writer")
 	@PostMapping("/modify")
 	public String modify(BoardVO board,RedirectAttributes rttr) {
-		log.info("modify: "+board);
+		log.info("BoardController : <Post> modify");
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("result","success");
 		}
 		return "redirect:/board/list";
 	}
 	
+	@PreAuthorize("principal.username==#writer")
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno")Long bno,RedirectAttributes rttr) {
-		log.info("remove: "+bno);
+	public String remove(@RequestParam("bno")Long bno,String writer,RedirectAttributes rttr) {
+		log.info("BoardController : <Post> remove "+bno);
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result","success");
 		}

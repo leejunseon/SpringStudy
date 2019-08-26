@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@include file="../includes/header.jsp" %>
+<sec:authentication property="principal" var="pinfo"/>
 
 <div class="container-fluid">
 	<h1 class="h3 mb-2 text-gray-800">Board Read</h1>
@@ -30,9 +31,13 @@
        			<input class="form-control" name='writer' value='<c:out value="${board.writer }"/>' readonly="readonly">
        		</div>
        		
-       		<button data-oper='modify' class="btn btn-primary btn-icon-split">
-       			<span class="text">Modify</span>
-       		</button>
+       		<sec:authorize access="isAuthenticated()">
+	       		<c:if test="${pinfo.username eq board.writer }">
+		       		<button data-oper='modify' class="btn btn-primary btn-icon-split">
+		       			<span class="text">Modify</span>
+		       		</button>
+	       		</c:if>
+       		</sec:authorize>
        		<button data-oper='list' class="btn btn-info btn-icon-split">
        			<span class="text">List</span>
        		</button>
@@ -50,9 +55,11 @@
 			<div class="form-group">
 				<textarea class="form-control" id='reply' rows="3" placeholder="Leave comments here"></textarea>
 			</div>
-			<button id='replyRegisterBtn' type="submit" class="btn btn-success btn-icon-split fa-pull-right">
-				<span class="text"><i class="fa fa-share"></i> Register</span>
-			</button>
+			<sec:authorize access="isAuthenticated()">
+				<button id='replyRegisterBtn' type="submit" class="btn btn-success btn-icon-split fa-pull-right">
+					<span class="text"><i class="fa fa-share"></i> Register</span>
+				</button>
+			</sec:authorize>
 		</div>
 		<hr>
         <div class="card-body">
@@ -223,13 +230,13 @@ function editReply(rno,writer,content){
 }
 
 function removeReply(rno){
-	var rno={
+	var reply={
 		rno:rno,
 		csrf_header:"${_csrf.headerName}",
 		csrf_token:"${_csrf.token }"
 	};
 	replyService.remove(
-		rno
+		reply
 		,
 		function(result){
 			alert(result);
