@@ -39,10 +39,10 @@ public class MemberTests {
 		try {
 			con=ds.getConnection();
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(2, pwencoder.encode("password"));
+			pstmt.setString(2, pwencoder.encode("dkxltmxm135"));
 			
 			pstmt.setString(1, "dlwnstjs");
-			pstmt.setString(3, "사용자~~");
+			pstmt.setString(3, "이준선");
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
