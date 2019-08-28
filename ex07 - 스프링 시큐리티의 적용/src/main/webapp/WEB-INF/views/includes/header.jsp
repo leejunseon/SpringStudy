@@ -259,12 +259,15 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <sec:authorize access="isAuthenticated()">
-                       		<li><a href="/customLogout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-                       	</sec:authorize>
-                       	 <sec:authorize access="isAnonymous()">
-                       		<li><a href="/customLogin"><i class="fa fa-sign-out fa-fw"></i> Login</a></li>
-                       	</sec:authorize>
+                       	<form name="authorize">
+                       	    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+	                        <sec:authorize access="isAuthenticated()">
+	                       		<li><a href="javascript:logout();"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+	                       	</sec:authorize>
+	                       	 <sec:authorize access="isAnonymous()">
+	                       		<li><a href="/customLogin"><i class="fa fa-sign-out fa-fw"></i> Login</a></li>
+	                       	</sec:authorize>       
+                       	</form>                	
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -381,5 +384,12 @@
         </nav>
 
         <div id="page-wrapper">
-        
+<script>
+function logout(){
+  var f=document.authorize;  //폼 name
+  f.action="/customLogout";  //이동할 페이지
+  f.method="post";  //POST방식
+  f.submit();
+}
+</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

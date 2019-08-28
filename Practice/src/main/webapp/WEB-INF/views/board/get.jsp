@@ -52,10 +52,10 @@
         	<i class="fa fa-comments fa-fw"></i>Reply
         </div>
          <div class="card-body">
-			<div class="form-group">
-				<textarea class="form-control" id='reply' rows="3" placeholder="Leave comments here"></textarea>
-			</div>
 			<sec:authorize access="isAuthenticated()">
+				<div class="form-group">
+					<textarea class="form-control" id='reply' rows="3" placeholder="Leave comments here"></textarea>
+				</div>
 				<button id='replyRegisterBtn' type="submit" class="btn btn-success btn-icon-split fa-pull-right">
 					<span class="text"><i class="fa fa-share"></i> Register</span>
 				</button>
@@ -122,6 +122,7 @@ $(document).ready(function(){
 	});
 	
 });
+
 
 var bnoValue='<c:out value="${board.bno}"/>';
 var replyUL=$(".chat");
