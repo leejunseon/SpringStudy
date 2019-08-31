@@ -24,6 +24,12 @@
 		where rno=#{rno}
 	</delete>
 	
+	<delete id="deleteAll">
+		delete
+		from tbl_reply
+		where bno=#{bno}
+	</delete>
+	
 	<update id="update">
 		update tbl_reply
 		set reply=#{reply},

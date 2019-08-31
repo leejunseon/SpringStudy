@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.practice.domain.BoardVO;
 import com.practice.domain.BoardPagingDto;
 import com.practice.mapper.BoardMapper;
+import com.practice.mapper.ReplyMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,6 +18,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardServiceImpl implements BoardService{
 	
 	private BoardMapper mapper;
+	private ReplyMapper replyMapper;
 
 	@Override
 	public List<BoardVO> getList(BoardPagingDto BoardPagingDto) {
@@ -50,6 +52,7 @@ public class BoardServiceImpl implements BoardService{
 	public boolean remove(Long bno) {
 		// TODO Auto-generated method stub
 		log.info("BoardService : remove "+bno);
+		replyMapper.delete(bno);
 		return mapper.delete(bno)==1;
 	}
 

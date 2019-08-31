@@ -91,7 +91,7 @@ $(document).ready(function(){
 		operForm.submit();
 	});	
 	
-	var replyer='<sec:authentication property="principal.username"/>';
+	//var replyer=${pinfo.username}; -> 로그인 했을 시에만 쓸 수 있게 수정 요망
 	$("#replyRegisterBtn").on("click",function(e){
 		var reply={
 				reply:$("#reply").val(),
