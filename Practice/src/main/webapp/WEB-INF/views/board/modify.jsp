@@ -44,15 +44,15 @@
 	       		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 	       		<sec:authorize access="isAuthenticated()">
 		       		<c:if test="${pinfo.username eq board.writer }">
-			       		<button type="submit" data-oper='modify' class="btn btn-primary btn-icon-split">
+			       		<button type="submit" class="btn btn-primary btn-icon-split">
 			       			<span class="text">Modify</span>
 			       		</button>
-			       		<button type="submit" data-oper='remove' class="btn btn-danger btn-icon-split">
+			       		<button type="submit" id='remove' class="btn btn-danger btn-icon-split">
 			       			<span class="text">Remove</span>
 			       		</button>
 		       		</c:if>
 	       		</sec:authorize>
-	       		<button type="submit" data-oper='list' class="btn btn-info btn-icon-split">
+	       		<button type="submit" id='list' class="btn btn-info btn-icon-split">
 	       			<span class="text">List</span>
 	       		</button>
 	       	</form>
@@ -65,18 +65,14 @@ $(document).ready(function(){
 	
 	var formObj=$("form");
 	
-	$('button').on("click",function(e){
-		e.preventDefault();
-		var operation=$(this).data("oper");
-		
-		console.log("button operation : "+operation);
-		
-		if(operation==='remove'){
-			formObj.attr("action","/board/remove");
-		}else if(operation==='list'){
-			formObj.attr("action","/board/list").attr("method","get");
-			formObj.empty();
-		}
+	$('#remove').on("click",function(e){		
+		formObj.attr("action","/board/remove");
+		formObj.submit();
+	});
+	
+	$('#list').on("click",function(e){
+		formObj.attr("action","/board/list").attr("method","get");
+		formObj.empty();
 		formObj.submit();
 	});
 });

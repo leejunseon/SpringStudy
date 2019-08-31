@@ -326,12 +326,15 @@
                 <div class="dropdown-divider"></div>
                 <sec:authorize access="isAuthenticated()">
 	                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-	                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-	                  Logout
+	                  	<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+	                	Logout
 	                </a>
                 </sec:authorize>
                 <sec:authorize access="isAnonymous()">
-               		<a href="/customLogin"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Login</a>
+               		<a class="dropdown-item" href="/customLogin">
+               			<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 
+               			Login
+               		</a>
                 </sec:authorize>
               </div>
             </li>

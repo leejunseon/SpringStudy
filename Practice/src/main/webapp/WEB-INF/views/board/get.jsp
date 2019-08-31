@@ -91,10 +91,11 @@ $(document).ready(function(){
 		operForm.submit();
 	});	
 	
+	var replyer='<sec:authentication property="principal.username"/>';
 	$("#replyRegisterBtn").on("click",function(e){
 		var reply={
 				reply:$("#reply").val(),
-				replyer:"replyer",
+				replyer:replyer,
 				bno:bnoValue,
 				csrf_header:"${_csrf.headerName}",
 				csrf_token:"${_csrf.token }"
@@ -126,6 +127,7 @@ $(document).ready(function(){
 
 var bnoValue='<c:out value="${board.bno}"/>';
 var replyUL=$(".chat");
+var replyer='<sec:authentication property="principal.username"/>';
 function showList(page){
 	console.log("show replies "+page);
 	replyService.getReplies(
@@ -155,8 +157,10 @@ function showList(page){
 				str+="<li id='"+list[i].rno+"'>";
 				str+="<div><div class='header'>";
 				str+="<strong class='primary-font'>"+list[i].replyer+"</strong>";
-				str+="<a href='javascript:void(0)' onclick='editReply("+list[i].rno+",\""+list[i].replyer+"\",\""+list[i].reply+"\")' style='padding-left:15px'>수정</a>";
-				str+="<a href='javascript:void(0)' onclick='removeReply("+list[i].rno+")' style='padding-left:15px;'>삭제</a>";
+				if(list[i].replyer==replyer){
+					str+="<a href='javascript:void(0)' onclick='editReply("+list[i].rno+",\""+list[i].replyer+"\",\""+list[i].reply+"\")' style='padding-left:15px'>수정</a>";
+					str+="<a href='javascript:void(0)' onclick='removeReply("+list[i].rno+")' style='padding-left:15px;'>삭제</a>";
+				}
 				str+="<small class='fa-pull-right text-muted'>"+date+"</small></div>";
 				str+="<p>"+list[i].reply+"</p><hr></div></li>";
 			}

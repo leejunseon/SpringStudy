@@ -37,7 +37,7 @@
         	<form method='post' action="/customLogout">
         		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
           		<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          		<input type="submit" class="btn btn-primary" value="Logout">
+          		<button type="submit" class="btn btn-primary">Logout</button>
 			</form>
         </div>
       </div>
