@@ -32,4 +32,14 @@
 			mem.userid=#{userid}
 	</select>
 	
+	<insert id="insertMember">
+		insert into tbl_member(userid,userpw,username) 
+		values (#{userid},#{userpw},#{userName})
+	</insert>
+	
+	<insert id="insertAuth">
+		insert into tbl_member_auth(userid,auth) 
+		values (#{userid},#{auth})
+	</insert>
+	
 </mapper>

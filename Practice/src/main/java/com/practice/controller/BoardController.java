@@ -66,7 +66,7 @@ public class BoardController {
 	}
 
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list() {
 		log.info("BoardController : <Get> list");
 	}
 	
@@ -110,4 +110,5 @@ public class BoardController {
 		}
 		return "redirect:/board/list";
 	}
+	
 }

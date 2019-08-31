@@ -37,7 +37,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -48,8 +48,8 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
+      <li class="nav-item active">
+        <a class="nav-link" href="/board/list">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -129,14 +129,7 @@
           <span>Charts</span></a>
       </li>
 
-      <!-- Nav Item - Tables -->
-      <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
-
-      <!-- Divider -->
+        <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
@@ -195,7 +188,8 @@
                 </form>
               </div>
             </li>
-
+            
+			<sec:authorize access="isAuthenticated()">
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -257,9 +251,9 @@
                 <h6 class="dropdown-header">
                   Message Center
                 </h6>
-               <!--  <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                    <img class="rounded-circle" src="" alt="">
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div class="font-weight-bold">
@@ -269,7 +263,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+                    <img class="rounded-circle" src="" alt="">
                     <div class="status-indicator"></div>
                   </div>
                   <div>
@@ -279,7 +273,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+                    <img class="rounded-circle" src="" alt="">
                     <div class="status-indicator bg-warning"></div>
                   </div>
                   <div>
@@ -289,58 +283,59 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+                    <img class="rounded-circle" src="" alt="">
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div>
                     <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
                     <div class="small text-gray-500">Chicken the Dog · 2w</div>
                   </div>
-                </a> -->
+                </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
               </div>
             </li>
 
             <div class="topbar-divider d-none d-sm-block"></div>
-
+			</sec:authorize>
+			
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <sec:authorize access="isAuthenticated()">
-	                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-	                  	<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-	                	Logout
-	                </a>
-                </sec:authorize>
-                <sec:authorize access="isAnonymous()">
-               		<a class="dropdown-item" href="/customLogin">
-               			<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 
+			<sec:authorize access="isAuthenticated()">
+            	<li class="nav-item dropdown no-arrow">
+              		<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                		<span class="mr-2 d-none d-lg-inline text-gray-600 small"><sec:authentication property="principal.username"/></span>
+                		<!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
+              		</a>
+              		<!-- Dropdown - User Information -->
+              		<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                		<a class="dropdown-item" href="#">
+                  			<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  			Profile
+                		</a>
+                		<a class="dropdown-item" href="#">
+                  			<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  			Settings
+		                </a>
+		                <a class="dropdown-item" href="#">
+		                  	<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+		                  	Activity Log
+		                </a>
+		                <div class="dropdown-divider"></div>
+		            	<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+		                  	<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+		                	Logout
+		                </a>
+					</div>
+				</li>
+			</sec:authorize>
+            <sec:authorize access="isAnonymous()">
+            	<li class="nav-item dropdown no-arrow">
+               		<a class="nav-link dropdown-toggle text-primary" href="/customLogin" role="button">
+                		<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-primary"></i> 
                			Login
-               		</a>
-                </sec:authorize>
-              </div>
-            </li>
-
+              		</a>
+               	</li>
+			</sec:authorize>
           </ul>
-
         </nav>
         <!-- End of Topbar -->
 

@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.practice.domain.MemberVO;
+
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -27,6 +29,22 @@ public class CommonController {
 		
 		if(logout!=null)
 			model.addAttribute("logout","Logout!!");
+	}
+	
+	@GetMapping("/memberRegister")
+	public void memberRegister() {
+		log.info("CommonController : <Get> memberRegister");
+	}
+	
+	@PostMapping("/memberRegister")
+	public String memberRegister(MemberVO member) {
+		
+		return "redirect:/customLogin";
+	}
+	
+	@GetMapping("/findPassword")
+	public void findPassword() {
+		log.info("CommonController : <Get> findPassword");
 	}
 	
 	@PostMapping("/customLogout")

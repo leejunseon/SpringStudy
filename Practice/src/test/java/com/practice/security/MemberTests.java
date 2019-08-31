@@ -12,6 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.practice.domain.AuthVO;
+import com.practice.domain.MemberVO;
+import com.practice.mapper.MemberMapper;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -28,53 +32,27 @@ public class MemberTests {
 	@Setter(onMethod_=@Autowired)
 	private DataSource ds;
 	
-	/*@Test
-	public void testInsertMember() {
-		
-		String sql="insert into tbl_member(userid,userpw,username) values (?,?,?)";
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		
-		try {
-			con=ds.getConnection();
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(2, pwencoder.encode("dkxltmxm135"));
-			
-			pstmt.setString(1, "dlwnstjs");
-			pstmt.setString(3, "이준선");
-			
-			pstmt.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(pstmt!=null) {try {pstmt.close();}catch(Exception e) {}}
-			if(con!=null) {try{con.close();}catch(Exception e) {}}
-		}
-	}*/
+	@Setter(onMethod_=@Autowired)
+	MemberMapper mapper;
 	
 	@Test
+	public void testInsertMember() {
+		
+		MemberVO member=new MemberVO();
+		member.setUserid("ljs921026");
+		member.setUserpw(pwencoder.encode("dkxltmxm135"));
+		member.setUserName("이준선");
+		log.info("memberInsert Test: "+mapper.insertMember(member));
+
+	}
+	
+/*	@Test
 	public void testInsertAuth() {
 		
-		String sql="insert into tbl_member_auth(userid,auth) values (?,?)";
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		
-		try {
-			con=ds.getConnection();
-			pstmt=con.prepareStatement(sql);
-			
-			pstmt.setString(1, "dlwnstjs");
-			pstmt.setString(2, "ROLE_USER");
-			
-			pstmt.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(pstmt!=null) {try {pstmt.close();}catch(Exception e) {}}
-			if(con!=null) {try{con.close();}catch(Exception e) {}}
-		}
-	}
+		AuthVO auth=new AuthVO();
+		auth.setUserid("ljs921026");
+		auth.setAuth("ROLE_USER");
+		log.info("authInsert Test: "+mapper.insertAuth(auth));
+	}*/
 
 }
