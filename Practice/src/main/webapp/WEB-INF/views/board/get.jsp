@@ -91,7 +91,10 @@ $(document).ready(function(){
 		operForm.submit();
 	});	
 	
-	//var replyer=${pinfo.username}; -> 로그인 했을 시에만 쓸 수 있게 수정 요망
+	var replyer=null;
+    <sec:authorize access="isAuthenticated()">
+    	replyer='<sec:authentication property="principal.username"/>';
+    </sec:authorize>
 	$("#replyRegisterBtn").on("click",function(e){
 		var reply={
 				reply:$("#reply").val(),
@@ -127,7 +130,10 @@ $(document).ready(function(){
 
 var bnoValue='<c:out value="${board.bno}"/>';
 var replyUL=$(".chat");
-var replyer='<sec:authentication property="principal.username"/>';
+var replyer=null;
+<sec:authorize access="isAuthenticated()">
+	replyer='<sec:authentication property="principal.username"/>';
+</sec:authorize>
 function showList(page){
 	console.log("show replies "+page);
 	replyService.getReplies(
