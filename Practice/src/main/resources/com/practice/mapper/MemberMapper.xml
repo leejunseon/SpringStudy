@@ -42,4 +42,10 @@
 		values (#{userid},#{auth})
 	</insert>
 	
+	<select id="checkReduplication" resultType="Integer">
+		select count(*)
+		from tbl_member
+		where userid=(#{id})
+	</select>
+	
 </mapper>

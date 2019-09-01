@@ -50,7 +50,7 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="/memberRegister">Create an Account!</a>
+                    <a class="small" href="/member/memberRegister">Create an Account!</a>
                   </div>
                   <div class="text-center">
                     <a class="small" href="/customLogin">Already have an account? Login!</a>

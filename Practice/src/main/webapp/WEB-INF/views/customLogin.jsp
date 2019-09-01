@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 <head>
 
@@ -68,10 +72,10 @@
                   
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="/findPassword">Forgot Password?</a>
+                    <a class="small" href="/member/findPassword">Forgot Password?</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="/memberRegister">Create an Account!</a>
+                    <a class="small" href="/member/memberRegister">Create an Account!</a>
                   </div>
                 </div>
               </div>
@@ -94,6 +98,15 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/resources/js/sb-admin-2.min.js"></script>
+  
+<script type="text/javascript">
+	$(document).ready(function(){
+		var result='<c:out value="${result}"/>';
+	if(result!==''){
+		alert(result);	
+	}
+})
+</script>
 
 </body>
 

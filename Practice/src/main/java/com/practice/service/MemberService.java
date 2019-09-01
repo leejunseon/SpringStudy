@@ -1,11 +1,9 @@
-package com.practice.mapper;
+package com.practice.service;
 
 import com.practice.domain.AuthVO;
 import com.practice.domain.MemberVO;
 
-public interface MemberMapper {
-	
-	public MemberVO read(String userid);
+public interface MemberService {
 	
 	public int insertMember(MemberVO member);
 	

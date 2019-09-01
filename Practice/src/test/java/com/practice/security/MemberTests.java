@@ -46,7 +46,13 @@ public class MemberTests {
 
 	}
 	
-/*	@Test
+	/*@Test
+	public void testCheckReduplication() {
+		String id="dlwnstjs";
+		log.info("number of id: "+mapper.checkReduplication(id));
+	}*/
+	
+	/*Test
 	public void testInsertAuth() {
 		
 		AuthVO auth=new AuthVO();

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 <head>
 
@@ -35,16 +39,16 @@
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
               
-              <form class="user">
+              <form class="user" method='post' action="/member/memberRegister">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Name">
+                    <input type="text" class="form-control form-control-user" name="userName" placeholder="Name">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="ID">
+                  <input type="text" class="form-control form-control-user" name="userid" placeholder="ID">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                    <input type="password" class="form-control form-control-user" name="userpw" placeholder="Password">
                   </div>
                   <div class="col-sm-6">
                     <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
@@ -52,9 +56,9 @@
                 </div>
                 
                 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                <button type="submit" class="btn btn-primary btn-user btn-block">
                   Register Account
-                </a>
+                </button>
                 <!-- <hr>
                 <a href="index.html" class="btn btn-google btn-user btn-block">
                   <i class="fab fa-google fa-fw"></i> Register with Google
@@ -66,7 +70,7 @@
               
               <hr>
               <div class="text-center">
-                <a class="small" href="/findPassword">Forgot Password?</a>
+                <a class="small" href="/member/findPassword">Forgot Password?</a>
               </div>
               <div class="text-center">
                 <a class="small" href="/customLogin">Already have an account? Login!</a>
@@ -88,6 +92,15 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/resources/js/sb-admin-2.min.js"></script>
+	
+<script type="text/javascript">
+	$(document).ready(function(){
+		var result='<c:out value="${result}"/>';
+	if(result!==''){
+		alert(result);	
+	}
+})
+</script>
 
 </body>
 
