@@ -37,4 +37,10 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.checkReduplication(id);
 	}
 
+	@Override
+	public int updateMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		return mapper.updateMember(member);
+	}
+
 }

@@ -49,9 +49,19 @@
 	</select>
 	
 	<select id="getEmail" resultType="Integer">
-	select count(*)
-	from tbl_member
-	where userid=#{id} and email=#{email}
+		select count(*)
+		from tbl_member
+		where userid=#{id} and email=#{email}
 	</select>
+	
+	<update id="updateMember">
+		update 
+			tbl_member
+		set 
+			userpw=#{userpw},
+			updateDate=sysdate
+		where
+			userid=#{userid}
+	</update>
 	
 </mapper>

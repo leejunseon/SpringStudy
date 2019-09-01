@@ -24,18 +24,18 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 	
 	private MemberService service;
+	private BCryptPasswordEncoder pwencoder;
 
 	@GetMapping("/memberRegister")
 	public void memberRegister() {
-		log.info("CommonController : <Get> memberRegister");
+		log.info("MemberController : <Get> memberRegister");
 	}
 	
 	@Transactional
 	@PostMapping("/memberRegister")
 	public String memberRegister(MemberVO member,RedirectAttributes rttr) {
-		log.info("CommonController : <Post> memberRegister");
-		String result="";
-		BCryptPasswordEncoder pwencoder=new BCryptPasswordEncoder();
+		log.info("MemberController : <Post> memberRegister");
+		String resultPage="";
 		if(service.checkReduplication(member.getUserid())==0) {
 			AuthVO auth=new AuthVO();
 			auth.setUserid(member.getUserid());
@@ -43,23 +43,34 @@ public class MemberController {
 			member.setUserpw(pwencoder.encode(member.getUserpw()));
 			if(service.insertMember(member)!=0&&service.insertAuth(auth)!=0) {
 				rttr.addFlashAttribute("result",member.getUserid());
-				result="redirect:/customLogin";
+				resultPage="redirect:/customLogin";
 			}
 		}else {
 			rttr.addFlashAttribute("result",member.getUserid()+"는 중복되는 아이디입니다. 다른 아이디를 사용해주세요.");
-			result="redirect:/member/memberRegister";
+			resultPage="redirect:/member/memberRegister";
 		}
-		return result;
+		return resultPage;
 	}
 	
 	@GetMapping("/findPassword")
 	public void findPassword() {
-		log.info("CommonController : <Get> findPassword");
+		log.info("MemberController : <Get> findPassword");
 	}
 	
 	@GetMapping("/resetPassword")
 	public void resetPassword(String id,Model model) {
-		log.info("CommonController : <Get> resetPassword: "+id);
+		log.info("MemberController : <Get> resetPassword: "+id);
 		model.addAttribute("userid",id);
+	}
+	
+	@PostMapping("/resetPassword")
+	public String resetPassword(MemberVO member) {
+		String resultPage="";
+		log.info("MemberController : <Post> resetPassword: "+member);
+		member.setUserpw(pwencoder.encode(member.getUserpw()));
+		if(service.updateMember(member)==1)
+			resultPage="redirect:/customLogin";
+		
+		return resultPage;
 	}
 }

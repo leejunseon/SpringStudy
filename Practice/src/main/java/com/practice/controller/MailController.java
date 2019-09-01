@@ -43,7 +43,7 @@ public class MailController {
 				.append("<p>Click below to reset your password</p>")
 				.append("<a href='http://localhost:8080/member/resetPassword?id=")
 				.append(id)
-				.append("' target='_blenk'>"+id+"이메일 인증 확인</a>")
+				.append("' target='_blenk'>Reset Password</a>")
 				.toString());
 		
 		boolean result=mailUtil.send(mail);

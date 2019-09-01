@@ -40,14 +40,18 @@
                     <h1 class="h4 text-gray-900 mb-2">Reset your Password</h1>
                     <p class="mb-4">Enter new password below</p>
                   </div>
-                  <form class="user">
+                  
+                  <form method="post" action="/member/resetPassword" class="user">
                   	<div class="form-group">
-                      <input type="text" class="form-control form-control-user" placeholder="Enter your new Password...">
+                      <input type="password" name="userpw" class="form-control form-control-user" placeholder="Enter your new Password...">
                     </div>
-                    <a href="login.html" class="btn btn-primary btn-user btn-block">
+                    <input type="hidden" name="userid" value="${userid}"/>
+                    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
                       Reset Password
-                    </a>
+                    </button>
                   </form>
+                  
                   <hr>
                   <div class="text-center">
                     <a class="small" href="/member/memberRegister">Create an Account!</a>

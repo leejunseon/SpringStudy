@@ -16,4 +16,6 @@ public interface MemberMapper {
 	public int checkReduplication(String id);
 	
 	public int getEmail(@Param("id")String id,@Param("email")String email);
+	
+	public int updateMember(MemberVO member);
 }

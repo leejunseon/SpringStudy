@@ -10,4 +10,6 @@ public interface MemberService {
 	public int insertAuth(AuthVO auth);
 
 	public int checkReduplication(String id);
+	
+	public int updateMember(MemberVO member);
 }
