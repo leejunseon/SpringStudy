@@ -21,8 +21,7 @@ import lombok.extern.log4j.Log4j;
 	"file:src/main/webapp/WEB-INF/spring/root-context.xml",
 	"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
 @Log4j
-public class MemberControllerTests {
-
+public class MailControllerTests {
 	@Setter(onMethod_= {@Autowired})
 	private WebApplicationContext ctx;
 	
@@ -34,12 +33,10 @@ public class MemberControllerTests {
 	}
 
 	@Test
-	public void testRegister() throws Exception{
-		String resultPage=mockMvc.perform(MockMvcRequestBuilders.post("/member/memberRegister")
-							.param("userid", "ljs")
-							.param("userpw", "dkxltmxm135")
-							.param("email", "ljs921026@gmail.com")
-							.param("userName", "¿Ã¡ÿº±")
+	public void testSendMail() throws Exception{
+		String resultPage=mockMvc.perform(MockMvcRequestBuilders.post("/mail/send")
+							.param("ID", "ljs921026")
+							.param("to", "ljs921026@gmail.com")
 						).andReturn()
 						.getModelAndView()
 						.getViewName();

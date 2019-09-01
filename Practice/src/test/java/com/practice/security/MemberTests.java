@@ -39,9 +39,10 @@ public class MemberTests {
 	public void testInsertMember() {
 		
 		MemberVO member=new MemberVO();
-		member.setUserid("ljs921026");
+		member.setUserid("ljs");
 		member.setUserpw(pwencoder.encode("dkxltmxm135"));
 		member.setUserName("¿Ã¡ÿº±");
+		member.setEmail("ljs921026@gmail.com");
 		log.info("memberInsert Test: "+mapper.insertMember(member));
 
 	}

@@ -37,7 +37,7 @@ public class BoardControllerTests {
 		this.mockMvc=MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
-	@Test
+	/*@Test
 	public void testRegister() throws Exception{
 		String resultPage=mockMvc.perform(MockMvcRequestBuilders.post("/board/register")
 							.param("title", "테스트 새글 제목")
@@ -48,7 +48,7 @@ public class BoardControllerTests {
 						.getViewName();
 		
 		log.info(resultPage);
-	}
+	}*/
 	
 	/*@Test
 	public void testGet() throws Exception{

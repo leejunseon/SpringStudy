@@ -24,6 +24,8 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.practice.controller" />	
+	<context:component-scan base-package="com.practice.service"/>
+	<context:component-scan base-package="com.practice.util" />	
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
 	
 </beans:beans>

@@ -86,7 +86,7 @@ public class BoardController {
 	}
 	
 	@GetMapping({"/get","/modify"})
-	public void get(@RequestParam("bno")Long bno,Model model) {//@RequestParam 생략해도 무방. 파라미터 이름과 변수 이름을 기준으로 동작하기 때문
+	public void get(@RequestParam("bno")Long bno,Model model) {
 		log.info("BoardController : <Get> get or modify "+bno);
 		model.addAttribute("board",service.get(bno));
 	}

@@ -33,4 +33,5 @@ public class CommonController {
 	public void logoutPost() {
 		log.info("CommonController : <Post> customLogout");
 	}
+
 }

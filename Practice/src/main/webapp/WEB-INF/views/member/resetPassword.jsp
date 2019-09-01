@@ -37,23 +37,17 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                    <p class="mb-4">We get it, stuff happens. Just enter your email address below and we'll send you a link to reset your password!</p>
+                    <h1 class="h4 text-gray-900 mb-2">Reset your Password</h1>
+                    <p class="mb-4">Enter new password below</p>
                   </div>
-                  
-                  <form method="post" action="/mail/send" class="user">
+                  <form class="user">
                   	<div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="id" aria-describedby="emailHelp" placeholder="Enter Your Id...">
+                      <input type="text" class="form-control form-control-user" placeholder="Enter your new Password...">
                     </div>
-                    <div class="form-group">
-                      <input type="email" class="form-control form-control-user" name="to" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                    </div>
-                    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <a href="login.html" class="btn btn-primary btn-user btn-block">
                       Reset Password
-                    </button>
+                    </a>
                   </form>
-                  
                   <hr>
                   <div class="text-center">
                     <a class="small" href="/member/memberRegister">Create an Account!</a>
