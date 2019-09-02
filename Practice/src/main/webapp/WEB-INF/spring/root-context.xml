@@ -38,6 +38,18 @@
 		</props>
 	</property>
     </bean>
+    
+    <!-- MessageSource -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="defaultEncoding">
+			<value>utf-8</value>
+		</property>
+		<property name="basenames">
+	        <list>
+	        	<value>messages_ko</value>
+	        </list>
+		</property>
+	</bean>
 	
 	<mybatis-spring:scan base-package="com.practice.mapper"/>	
 </beans>

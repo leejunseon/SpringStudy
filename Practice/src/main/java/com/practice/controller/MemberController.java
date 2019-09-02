@@ -1,11 +1,18 @@
 package com.practice.controller;
 
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,14 +34,24 @@ public class MemberController {
 	private BCryptPasswordEncoder pwencoder;
 
 	@GetMapping("/memberRegister")
-	public void memberRegister() {
+	public void memberRegister(@ModelAttribute MemberVO member) {
 		log.info("MemberController : <Get> memberRegister");
 	}
 	
 	@Transactional
 	@PostMapping("/memberRegister")
-	public String memberRegister(MemberVO member,RedirectAttributes rttr) {
+	public String memberRegister(@ModelAttribute @Valid MemberVO member,BindingResult result,RedirectAttributes rttr) {
 		log.info("MemberController : <Post> memberRegister");
+		
+		if(result.hasErrors()) {
+			log.info("MemberController : Valid Error");
+			List<ObjectError> list=result.getAllErrors();
+			for(ObjectError error:list) {
+				log.info(error);
+			}
+			return "redirect:/customLogin";
+		}
+		
 		String resultPage="";
 		if(service.checkReduplication(member.getUserid())==0) {
 			AuthVO auth=new AuthVO();
