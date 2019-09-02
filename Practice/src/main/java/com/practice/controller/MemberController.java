@@ -49,7 +49,7 @@ public class MemberController {
 			for(ObjectError error:list) {
 				log.info(error);
 			}
-			return "redirect:/customLogin";
+			return "/member/memberRegister";
 		}
 		
 		String resultPage="";

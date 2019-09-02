@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <head>
@@ -40,27 +41,27 @@
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
               
-              <form:form class="user" modelAttribute="MemberVO" method='post' action="/member/memberRegister">
+              <form:form modelAttribute="memberVO" class="user" method='post' action="/member/memberRegister">
                 <div class="form-group">
-                    <form:input path="userName" type="text" class="form-control form-control-user" name="userName" placeholder="Name"/>
-                  	<form:errors path="userName"/>
+					<form:input path="userName" type="text" class="form-control form-control-user" placeholder="Name"/>
+					<form:errors path="userName" class="text-xs font-weight-bold text-danger col-auto"/>
                 </div>
                 <div class="form-group">
-                  	<form:input path="userid" input type="text" class="form-control form-control-user" name="userid" placeholder="ID"/>
-			    	<form:errors path="userid"/>
+                	<form:input path="userid" type="text" class="form-control form-control-user" placeholder="ID"/>
+					<form:errors path="userid" class="text-xs font-weight-bold text-danger col-auto"/>
                 </div>
                 <div class="form-group">
-                  	<form:input path="Email" input type="text" class="form-control form-control-user" name="email" placeholder="Email"/>
-			        <form:errors path="Email"/>
+                	<form:input path="email" type="text" class="form-control form-control-user" placeholder="Email"/>
+					<form:errors path="email" class="text-xs font-weight-bold text-danger col-auto"/>
                 </div>
                 <div class="form-group row">
-                <div class="col-sm-6">
-                  	<form:input path="password" input type="password" class="form-control form-control-user" name="userpw" placeholder="Password"/>
-			        <form:errors path="password"/>
-                </div>
-                <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
-                  </div>
+	                <div class="col-sm-6">
+	                	<form:input path="userpw" type="text" class="form-control form-control-user" placeholder="Password"/>
+						<form:errors path="userpw" class="text-xs font-weight-bold text-danger col-auto"/>
+	                </div>
+	                <div class="col-sm-6">
+	                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
+	                </div>
                 </div>
                 
                 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
