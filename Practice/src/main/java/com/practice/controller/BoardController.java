@@ -2,12 +2,17 @@ package com.practice.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,14 +77,24 @@ public class BoardController {
 	
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
-	public void register() {
+	public void register(@ModelAttribute BoardVO board) {
 		log.info("BoardController : <Get> register");
 	}
 	
 	@PostMapping("/register")
 	@PreAuthorize("isAuthenticated()")
-	public String register(BoardVO board,RedirectAttributes rttr) {
+	public String register(@ModelAttribute @Valid BoardVO board,BindingResult result,RedirectAttributes rttr) {
 		log.info("BoardController : <Post> register");
+		
+		if(result.hasErrors()) {
+			log.info("MemberController : Valid Error");
+			List<ObjectError> list=result.getAllErrors();
+			for(ObjectError error:list) {
+				log.info(error);
+			}
+			return "/board/register";
+		}
+		
 		service.register(board);
 		rttr.addFlashAttribute("result",board.getBno());
 		return "redirect:/board/list";
