@@ -77,24 +77,14 @@ public class BoardController {
 	
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
-	public void register(@ModelAttribute BoardVO board) {
+	public void register() {
 		log.info("BoardController : <Get> register");
 	}
 	
 	@PostMapping("/register")
 	@PreAuthorize("isAuthenticated()")
-	public String register(@ModelAttribute @Valid BoardVO board,BindingResult result,RedirectAttributes rttr) {
+	public String register(BoardVO board,RedirectAttributes rttr) {
 		log.info("BoardController : <Post> register");
-		
-		if(result.hasErrors()) {
-			log.info("MemberController : Valid Error");
-			List<ObjectError> list=result.getAllErrors();
-			for(ObjectError error:list) {
-				log.info(error);
-			}
-			return "/board/register";
-		}
-		
 		service.register(board);
 		rttr.addFlashAttribute("result",board.getBno());
 		return "redirect:/board/list";

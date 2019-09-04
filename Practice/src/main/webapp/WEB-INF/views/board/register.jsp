@@ -3,7 +3,6 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <%@include file="../includes/header.jsp" %>
 
@@ -15,16 +14,14 @@
         </div>
         <div class="card-body">
         
-        	<form:form modelAttribute="boardVO" role="form" action="/board/register" method="post">
+        	<form role="form" action="/board/register" method="post">
         		<div class="form-group">
         			<label>Title</label>
-        			<form:input path="title" type="text" class="form-control form-control-user" placeholder="Name"/>
-					<form:errors path="title" class="text-xs font-weight-bold text-danger col-auto"/>
+        			<input class="form-control" name='title' required>
         		</div>
         		<div class="form-group">
         			<label>Text area</label>
-        			<form:input path="content" type="text" class="form-control form-control-user" placeholder="Name"/>
-					<form:errors path="content" class="text-xs font-weight-bold text-danger col-auto"/>
+        			<textarea class="form-control" rows="3" name='content' required></textarea>
         		</div>
         		<div class="form-group">
         			<label>Writer</label>
@@ -38,7 +35,7 @@
         		<button type="reset" class="btn btn-primary btn-icon-split">
         			<span class="text">Reset Button</span>
         		</button>
-        	</form:form>
+        	</form>
         	
         </div>
 	</div>

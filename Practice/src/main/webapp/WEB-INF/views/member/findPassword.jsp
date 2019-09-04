@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <head>
 
@@ -43,10 +46,10 @@
                   
                   <form method="post" action="/mail/send" class="user">
                   	<div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="id" aria-describedby="emailHelp" placeholder="Enter Your Id...">
+                      <input type="text" class="form-control form-control-user" name="id" aria-describedby="emailHelp" placeholder="Enter Your Id..." required>
                     </div>
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" name="to" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="email" class="form-control form-control-user" name="to" aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
                     </div>
                     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -82,6 +85,15 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/resources/js/sb-admin-2.min.js"></script>
+  
+<script type="text/javascript">
+$(document).ready(function(){
+	var message='<c:out value="${message}"/>';
+	if(message!==''){
+		alert(message);	
+	}
+})
+</script>
 
 </body>
 
