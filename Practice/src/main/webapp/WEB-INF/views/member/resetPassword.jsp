@@ -43,7 +43,7 @@
                   
                   <form method="post" action="/member/resetPassword" class="user">
                   	<div class="form-group">
-                      <input type="password" name="userpw" class="form-control form-control-user" placeholder="Enter your new Password...">
+                      <input type="password" name="userpw" class="form-control form-control-user" placeholder="Enter your new Password..." required>
                     </div>
                     <input type="hidden" name="userid" value="${userid}"/>
                     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>

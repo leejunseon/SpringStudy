@@ -48,10 +48,10 @@
                   
                   <form class="user" method='post' action="/login">
                     <div class="form-group">
-                      <input type="text" name='username' value='admin' class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter ID...">
+                      <input type="text" name='username' class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter ID..." required>
                     </div>
                     <div class="form-group">
-                      <input type="password" name='password' value='admin' class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" name='password' class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" required>
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -101,10 +101,15 @@
   <script src="/resources/js/sb-admin-2.min.js"></script>
   
 <script type="text/javascript">
-	$(document).ready(function(){
-		var result='<c:out value="${result}"/>';
-	if(result!==''){
-		alert(result);	
+$(document).ready(function(){
+	var error='<c:out value="${error}"/>';
+	if(error!==''){
+		alert(error);	
+	}
+	
+	var logout='<c:out value="${logout}"/>';
+	if(logout!==''){
+		alert(logout);	
 	}
 })
 </script>
