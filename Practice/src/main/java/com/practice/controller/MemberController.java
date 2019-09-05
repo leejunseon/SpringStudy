@@ -40,7 +40,7 @@ public class MemberController {
 	
 	@Transactional
 	@PostMapping("/memberRegister")
-	public String memberRegister(@ModelAttribute @Valid MemberVO member,BindingResult result,RedirectAttributes rttr) {
+	public String memberRegister(@ModelAttribute @Valid MemberVO member,String repeatpw,BindingResult result,RedirectAttributes rttr) {
 		log.info("MemberController : <Post> memberRegister");
 		
 		if(result.hasErrors()) {

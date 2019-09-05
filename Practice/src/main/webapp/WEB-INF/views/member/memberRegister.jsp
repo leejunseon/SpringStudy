@@ -55,16 +55,17 @@
                 </div>
                 <div class="form-group row">
 	                <div class="col-sm-6">
-	                	<form:input path="userpw" type="text" class="form-control form-control-user" placeholder="Password"/>
+	                	<form:input path="userpw" type="password" class="form-control form-control-user" placeholder="Password"/>
 						<form:errors path="userpw" class="text-xs font-weight-bold text-danger col-auto"/>
 	                </div>
 	                <div class="col-sm-6">
-	                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
+	                    <input id="repeatpw" name="repeatpw" type="password" class="form-control form-control-user" placeholder="Repeat Password">
+	                    <span id="repeat" class="text-xs font-weight-bold text-danger col-auto"></span>
 	                </div>
                 </div>
                 
                 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-                <button type="submit" class="btn btn-primary btn-user btn-block">
+                <button type="submit" id="submit" class="btn btn-primary btn-user btn-block">
                   Register Account
                 </button>
                 <!-- <hr>
@@ -100,14 +101,26 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/resources/js/sb-admin-2.min.js"></script>
-	
+
 <script type="text/javascript">
-	$(document).ready(function(){
-		var result='<c:out value="${result}"/>';
+$(document).ready(function(){
+	var result='<c:out value="${result}"/>';
 	if(result!==''){
 		alert(result);	
 	}
 })
+
+$("#repeatpw").on("propertychange change keyup paste input", function() {
+    var repeat=$(this).val();
+    var pw=$("input[name=userpw]").val();
+    
+    if(pw!=repeat){
+    	$("#repeat").html("비밀번호가 일치하지 않습니다.");
+    }else{
+    	$("#repeat").html("");
+    }
+});
+
 </script>
 
 </body>
