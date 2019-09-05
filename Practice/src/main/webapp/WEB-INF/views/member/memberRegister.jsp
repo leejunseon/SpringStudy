@@ -108,13 +108,18 @@ $(document).ready(function(){
 	if(result!==''){
 		alert(result);	
 	}
+	
+	var error='<c:out value="${error}"/>';
+	if(error!==''){
+		alert(error);	
+	}
 })
 
 $("#repeatpw").on("propertychange change keyup paste input", function() {
     var repeat=$(this).val();
     var pw=$("input[name=userpw]").val();
     
-    if(pw!=repeat){
+    if(pw!==repeat){
     	$("#repeat").html("비밀번호가 일치하지 않습니다.");
     }else{
     	$("#repeat").html("");

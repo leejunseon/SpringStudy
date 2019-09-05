@@ -40,14 +40,17 @@ public class MemberController {
 	
 	@Transactional
 	@PostMapping("/memberRegister")
-	public String memberRegister(@ModelAttribute @Valid MemberVO member,String repeatpw,BindingResult result,RedirectAttributes rttr) {
+	public String memberRegister(@ModelAttribute @Valid MemberVO member,BindingResult result,String repeatpw,Model model,RedirectAttributes rttr) {
 		log.info("MemberController : <Post> memberRegister");
 		
-		if(result.hasErrors()) {
+		if(result.hasErrors()||(!member.getUserpw().equals(repeatpw))) {
 			log.info("MemberController : Valid Error");
 			List<ObjectError> list=result.getAllErrors();
 			for(ObjectError error:list) {
 				log.info(error);
+			}
+			if(!member.getUserpw().equals(repeatpw)) {
+				model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
 			}
 			return "/member/memberRegister";
 		}
