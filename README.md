@@ -5,7 +5,7 @@
 
 ---
 
-#### Practice
+### Practice
 
 - Spring + Maven
 - 게시판 구현
