@@ -7,5 +7,8 @@
 
 #### Practice
 
-- Bootstrap SBadmin2 사용한 게시판 구현
+- Spring + Maven
+- 게시판 구현
+- Bootstrap SBadmin2 사용
 - Datatables.js, moment.js 등 자바스크립트 플러그인 적용
+- javax.mail연동
